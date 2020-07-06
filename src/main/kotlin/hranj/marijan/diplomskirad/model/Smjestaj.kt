@@ -28,7 +28,7 @@ class Smjestaj {
     @Basic
     var maxOsoba = 0
 
-    @OneToMany(mappedBy = "smjestajByFkSmjestaj")
+    @OneToMany(mappedBy = "smjestaj")
     var rezervacije: List<Rezervacija>? = null
 
     @JoinColumn(name = "fk_lokacija", referencedColumnName = "id", nullable = false)

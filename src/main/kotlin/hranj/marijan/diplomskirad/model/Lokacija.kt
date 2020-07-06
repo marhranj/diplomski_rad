@@ -23,13 +23,13 @@ class Lokacija {
     @Basic
     var kategorija: String? = null
 
-    @OneToMany(mappedBy = "lokacijaByFkLokacija")
+    @OneToMany(mappedBy = "lokacija")
     var slikeLokacije: List<SlikaLokacije>? = null
 
-    @OneToMany(mappedBy = "lokacijaByFkLokacija")
+    @OneToMany(mappedBy = "lokacija")
     var smjestaji: List<Smjestaj>? = null
 
-    @OneToMany(mappedBy = "lokacijaByFkLokacija")
+    @OneToMany(mappedBy = "lokacija")
     var znamenitosti: List<Znamenitost>? = null
 
     override fun equals(o: Any?): Boolean {

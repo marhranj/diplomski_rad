@@ -27,7 +27,7 @@ class Korisnik {
     @Basic
     var telefon: String? = null
 
-    @OneToMany(mappedBy = "korisnikByFkKorisnik")
+    @OneToMany(mappedBy = "korisnik")
     var rezervacije: List<Rezervacija>? = null
 
     override fun equals(o: Any?): Boolean {
