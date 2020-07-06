@@ -1,0 +1,19 @@
+package hranj.marijan.diplomskirad.services.impl
+
+import hranj.marijan.diplomskirad.model.Smjestaj
+import hranj.marijan.diplomskirad.repository.SmjestajRepository
+import hranj.marijan.diplomskirad.services.SmjestajService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
+
+@Service
+class SmjestajServiceImpl : SmjestajService {
+
+    @Autowired
+    var smjestajRepository: SmjestajRepository? = null
+
+    override fun findAll(): List<Smjestaj> {
+        return smjestajRepository?.findAll() as List<Smjestaj>
+    }
+
+}
