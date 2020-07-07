@@ -1,14 +1,10 @@
 package hranj.marijan.diplomskirad.model
 
-import lombok.Getter
-import lombok.Setter
 import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
 class Smjestaj {
 
     @Column(name = "id", nullable = false)
@@ -37,6 +33,9 @@ class Smjestaj {
     @JoinColumn(name = "fk_lokacija", referencedColumnName = "id", nullable = false)
     @ManyToOne
     var lokacija: Lokacija? = null
+
+    @OneToMany(mappedBy = "smjestaj")
+    var slikeSmjestaja: List<SlikaSmjestaja>? = null
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true

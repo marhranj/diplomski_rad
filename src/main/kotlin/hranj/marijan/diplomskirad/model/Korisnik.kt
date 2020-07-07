@@ -1,13 +1,9 @@
 package hranj.marijan.diplomskirad.model
 
-import lombok.Getter
-import lombok.Setter
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
 class Korisnik {
 
     @Column(name = "id", nullable = false)

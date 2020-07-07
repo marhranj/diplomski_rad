@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class KorisnikServiceImpl(private val korisnikRepository: KorisnikRepository) : KorisnikService {
 
     override fun findAll(): List<Korisnik> {
-        return korisnikRepository.findAll() as List<Korisnik>
+        return korisnikRepository.findAll()
     }
 
 }

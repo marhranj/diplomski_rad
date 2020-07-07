@@ -1,14 +1,10 @@
 package hranj.marijan.diplomskirad.model
 
 import hranj.marijan.diplomskirad.enums.NazivUloge
-import lombok.Getter
-import lombok.Setter
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
 class Uloga {
 
     @Column(name = "id", nullable = false)

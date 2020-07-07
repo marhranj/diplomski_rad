@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class UlogaServiceImpl(private val ulogaRepository: UlogaRepository) : UlogaService {
 
     override fun findAll(): List<Uloga> {
-        return ulogaRepository.findAll() as List<Uloga>
+        return ulogaRepository.findAll()
     }
 
 }

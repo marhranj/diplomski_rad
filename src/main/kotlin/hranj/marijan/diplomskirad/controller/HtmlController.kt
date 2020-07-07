@@ -10,8 +10,27 @@ class HtmlController(private val korisnikService: KorisnikService) {
 
     @GetMapping("/news")
     fun blog(): String {
-        val korisnici: List<Korisnik> = korisnikService.findAll();
         return "news"
+    }
+
+    @GetMapping("/offers")
+    fun blog1(): String {
+        return "offers"
+    }
+
+    @GetMapping("/elements")
+    fun blog2(): String {
+        return "elements"
+    }
+
+    @GetMapping("/about")
+    fun blog3(): String {
+        return "about"
+    }
+
+    @GetMapping("/contact")
+    fun blog4(): String {
+        return "contact"
     }
 
 }

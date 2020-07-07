@@ -1,13 +1,9 @@
 package hranj.marijan.diplomskirad.model
 
-import lombok.Getter
-import lombok.Setter
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
 class Lokacija {
     
     @Column(name = "id", nullable = false)
@@ -22,9 +18,12 @@ class Lokacija {
     @Basic
     var opis: String? = null
 
-    @Column(name = "kategorija", nullable = false, length = 45)
-    @Basic
-    var kategorija: String? = null
+    @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    @JoinTable(name = "lokacija_kategorija",
+            joinColumns = [JoinColumn(name = "fk_lokacija")],
+            inverseJoinColumns = [JoinColumn(name = "fk_kategorija")]
+    )
+    var kategorije: Set<Kategorija>? = null
 
     @OneToMany(mappedBy = "lokacija")
     var slikeLokacije: List<SlikaLokacije>? = null
@@ -41,12 +40,11 @@ class Lokacija {
         val lokacija = o as Lokacija
         return id == lokacija.id &&
                 naziv == lokacija.naziv &&
-                opis == lokacija.opis &&
-                kategorija == lokacija.kategorija
+                opis == lokacija.opis;
     }
 
     override fun hashCode(): Int {
-        return Objects.hash(id, naziv, opis, kategorija)
+        return Objects.hash(id, naziv, opis)
     }
 
 }

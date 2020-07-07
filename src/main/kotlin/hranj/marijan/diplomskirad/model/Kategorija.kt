@@ -4,30 +4,29 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-class SlikaLokacije {
+class Kategorija {
 
     @Column(name = "id", nullable = false)
     @Id
     var id = 0
 
-    @Column(name = "putanja_slike", nullable = false, length = 200)
+    @Column(name = "naziv", nullable = false, length = 70)
     @Basic
-    var putanjaSlike: String? = null
+    var naziv: String? = null
 
-    @JoinColumn(name = "fk_lokacija", referencedColumnName = "id", nullable = false)
-    @ManyToOne
-    var lokacija: Lokacija? = null
+    @ManyToMany(mappedBy = "kategorije")
+    var lokacije: Set<Lokacija>? = null
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true
         if (o == null || javaClass != o.javaClass) return false
-        val that = o as SlikaLokacije
+        val that = o as Kategorija
         return id == that.id &&
-                putanjaSlike == that.putanjaSlike
+                naziv == that.naziv
     }
 
     override fun hashCode(): Int {
-        return Objects.hash(id, putanjaSlike)
+        return Objects.hash(id, naziv)
     }
 
 }

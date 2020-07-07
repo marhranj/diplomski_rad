@@ -4,7 +4,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-class SlikaLokacije {
+class SlikaSmjestaja {
 
     @Column(name = "id", nullable = false)
     @Id
@@ -14,14 +14,14 @@ class SlikaLokacije {
     @Basic
     var putanjaSlike: String? = null
 
-    @JoinColumn(name = "fk_lokacija", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_smjestaj", referencedColumnName = "id", nullable = false)
     @ManyToOne
-    var lokacija: Lokacija? = null
+    var smjestaj: Smjestaj? = null
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true
         if (o == null || javaClass != o.javaClass) return false
-        val that = o as SlikaLokacije
+        val that = o as SlikaSmjestaja
         return id == that.id &&
                 putanjaSlike == that.putanjaSlike
     }
