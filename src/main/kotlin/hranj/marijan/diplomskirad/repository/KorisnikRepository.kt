@@ -5,4 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface KorisnikRepository : JpaRepository<Korisnik, Long>
+interface KorisnikRepository : JpaRepository<Korisnik, Long> {
+
+    fun findByKorisnickoImeOrEmail(korisnickoIme: String, email: String): Korisnik?
+
+}

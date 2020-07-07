@@ -6,6 +6,7 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class DiplomskiRadApplication
 
-fun main(args: Array<String>) {
-	runApplication<DiplomskiRadApplication>(*args)
-}
+	fun main(args: Array<String>) {
+		runApplication<DiplomskiRadApplication>(*args)
+	}
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: baseHead(~{::title})">
-    <title>Destino</title>
+    <title>Početna</title>
 </head>
 <body>
 
@@ -28,9 +28,14 @@
                         <nav class="main_nav ml-auto">
                             <ul class="main_nav_list">
                                 <li class="main_nav_item active"><a href="#">Početna</a></li>
-                                <li class="main_nav_item"><a href="login">Login</a></li>
-                                <li class="main_nav_item"><a href="registracija">Registracija</a></li>
-                                <li class="main_nav_item"><a href="mojeRezervacije">Moje rezervacije</a></li>
+                                <th th:if="${korisnickoIme == ''}">
+                                    <li class="main_nav_item"><a href="prijava">Prijava</a></li>
+                                    <li class="main_nav_item"><a href="registracija">Registracija</a></li>
+                                </th>
+                                <th th:unless="${korisnickoIme == ''}">
+                                    <li class="main_nav_item"><a href="mojeRezervacije">Moje rezervacije</a></li>
+                                    <li class="main_nav_item"><a href="#" th:text="${korisnickoIme}"></a></li>
+                                </th>
                             </ul>
                         </nav>
 
@@ -49,8 +54,8 @@
         <div class="home_background" style="background-image:url(images/home.jpg)"></div>
         <div class="home_content">
             <div class="home_content_inner">
-                <div class="home_text_large">Otkrij</div>
-                <div class="home_text_small">Otkrij nove svijetove</div>
+                <div class="home_text_large">Istraži</div>
+                <div class="home_text_small">Istraži nove svijetove</div>
             </div>
         </div>
     </div>
@@ -59,57 +64,60 @@
 
     <div class="find">
         <!-- Image by https://unsplash.com/@garciasaldana_ -->
-        <div class="find_background parallax-window" data-parallax="scroll" data-image-src="images/find.jpg" data-speed="0.8"></div>
+        <div class="find_background parallax-window" data-parallax="scroll" data-image-src="images/find.jpg"
+             data-speed="0.8"></div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="find_title text-center">Find the Adventure of a lifetime</div>
+                    <div class="find_title">Pronađi putovanje za sebe</div>
                 </div>
                 <div class="col-12">
                     <div class="find_form_container">
-                        <form action="#" id="find_form" class="find_form d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-md-between justify-content-start flex-wrap">
-                            <div class="find_item">
-                                <div>Destination:</div>
-                                <input type="text" class="destination find_input" required="required" placeholder="Keyword here">
+                        <form action="#" id="find_form"
+                              class="find_form d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-md-between justify-content-start flex-wrap">
+                            <div class="row" style="width:100%; padding-bottom: 30px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Destinacija:</div>
+                                    <input type="text" class="destination find_input" required="required"
+                                           placeholder="Keyword here">
+                                </div>
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Kategorija:</div>
+                                    <select name="adventure" id="adventure" class="dropdown_item_select find_input">
+                                        <option>Categories</option>
+                                        <option>Categories</option>
+                                        <option>Categories</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="find_item">
-                                <div>Adventure type:</div>
-                                <select name="adventure" id="adventure" class="dropdown_item_select find_input">
-                                    <option>Categories</option>
-                                    <option>Categories</option>
-                                    <option>Categories</option>
-                                </select>
+                            <div class="row" style="width:100%; padding-bottom: 30px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Početak:</div>
+                                    <input type="date" name="trip-start" class="find_input" required="required"
+                                           value="2020-01-01">
+                                </div>
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Kraj:</div>
+                                    <input type="date" name="trip-start" class="find_input" required="required"
+                                           value="2020-01-01">
+                                </div>
                             </div>
-                            <div class="find_item">
-                                <div>Min price</div>
-                                <select name="min_price" id="min_price" class="dropdown_item_select find_input">
-                                    <option>&nbsp;</option>
-                                    <option>Price</option>
-                                    <option>Price</option>
-                                </select>
+
+                            <div class="row" style="width:100%">
+                                <div class="find_item">
+                                    <button class="button find_button">Find</button>
+                                </div>
                             </div>
-                            <div class="find_item">
-                                <div>Max price</div>
-                                <select name="max_price" id="max_price" class="dropdown_item_select find_input">
-                                    <option>&nbsp;</option>
-                                    <option>Price</option>
-                                    <option>Price</option>
-                                </select>
-                            </div>
-                            <button class="button find_button">Find</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Footer -->
 
     <th:block th:replace="fragments/footer :: footer"></th:block>
 
 </div>
-
-
 </body>
 </html>
