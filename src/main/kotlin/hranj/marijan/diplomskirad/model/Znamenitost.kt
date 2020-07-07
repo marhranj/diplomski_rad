@@ -1,10 +1,13 @@
 package hranj.marijan.diplomskirad.model
 
+import lombok.Getter
+import lombok.Setter
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "znamenitost", schema = "putovanja")
+@Getter
+@Setter
 class Znamenitost {
 
     @Column(name = "id", nullable = false)

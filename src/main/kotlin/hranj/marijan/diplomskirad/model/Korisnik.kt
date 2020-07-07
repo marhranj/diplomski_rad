@@ -1,10 +1,13 @@
 package hranj.marijan.diplomskirad.model
 
+import lombok.Getter
+import lombok.Setter
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "korisnik", schema = "putovanja")
+@Getter
+@Setter
 class Korisnik {
 
     @Column(name = "id", nullable = false)
@@ -37,6 +40,13 @@ class Korisnik {
 
     @OneToMany(mappedBy = "korisnik")
     var rezervacije: List<Rezervacija>? = null
+
+    @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    @JoinTable(name = "korisnik_uloga",
+            joinColumns = [JoinColumn(name = "fk_korisnik")],
+            inverseJoinColumns = [JoinColumn(name = "fk_uloga")]
+    )
+    var uloge: Set<Uloga>? = null
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true

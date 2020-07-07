@@ -1,11 +1,14 @@
 package hranj.marijan.diplomskirad.model
 
+import lombok.Getter
+import lombok.Setter
 import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "smjestaj", schema = "putovanja")
+@Getter
+@Setter
 class Smjestaj {
 
     @Column(name = "id", nullable = false)
