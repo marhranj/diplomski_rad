@@ -27,6 +27,14 @@ class Korisnik {
     @Basic
     var telefon: String? = null
 
+    @Column(name = "korisnicko_ime", nullable = false, length = 45)
+    @Basic
+    var korisnickoIme: String? = null
+
+    @Column(name = "lozinka", nullable = false, length = 100)
+    @Basic
+    var lozinka: String? = null
+
     @OneToMany(mappedBy = "korisnik")
     var rezervacije: List<Rezervacija>? = null
 
@@ -38,11 +46,13 @@ class Korisnik {
                 ime == korisnik.ime &&
                 prezime == korisnik.prezime &&
                 email == korisnik.email &&
-                telefon == korisnik.telefon
+                telefon == korisnik.telefon &&
+                korisnickoIme == korisnik.korisnickoIme &&
+                lozinka == korisnik.lozinka
     }
 
     override fun hashCode(): Int {
-        return Objects.hash(id, ime, prezime, email, telefon)
+        return Objects.hash(id, ime, prezime, email, telefon, korisnickoIme, lozinka)
     }
 
 }

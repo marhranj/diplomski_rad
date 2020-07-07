@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class LokacijaServiceImpl(private val lokacijaRepository: LokacijaRepository) : LokacijaService {
 
     override fun findAll(): List<Lokacija> {
-        return lokacijaRepository?.findAll() as List<Lokacija>
+        return lokacijaRepository.findAll() as List<Lokacija>
     }
 
 }

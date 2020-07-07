@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class ZnamenitostServiceImpl(private val znamenitostRepository: ZnamenitostRepository) : ZnamenitostService {
 
     override fun findAll(): List<Znamenitost> {
-        return znamenitostRepository?.findAll() as List<Znamenitost>
+        return znamenitostRepository.findAll() as List<Znamenitost>
     }
 
 }
