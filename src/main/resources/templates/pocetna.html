@@ -29,12 +29,21 @@
                             <ul class="main_nav_list">
                                 <li class="main_nav_item active"><a href="#">Početna</a></li>
                                 <th th:if="${korisnickoIme == ''}">
-                                    <li class="main_nav_item"><a href="prijava">Prijava</a></li>
-                                    <li class="main_nav_item"><a href="registracija">Registracija</a></li>
+                                    <li class="main_nav_item"><a href="/prijava">Prijava</a></li>
+                                    <li class="main_nav_item"><a href="/registracija">Registracija</a></li>
                                 </th>
                                 <th th:unless="${korisnickoIme == ''}">
-                                    <li class="main_nav_item"><a href="mojeRezervacije">Moje rezervacije</a></li>
-                                    <li class="main_nav_item"><a href="#" th:text="${korisnickoIme}"></a></li>
+                                    <li class="main_nav_item"><a href="/mojeRezervacije">Moje rezervacije</a></li>
+                                    <li th:classappend="${adminKorisnik} ? 'dropdown' : ''" class="main_nav_item">
+                                        <a th:text="${korisnickoIme}" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                        <div th:if="${adminKorisnik}" class="dropdown-menu without-line-height">
+                                            <a class="dropdown-item">Akcije admina</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/admin/lokacija">Dodaj lokaciju</a>
+                                            <a class="dropdown-item" href="/admin/smjestaj">Dodaj smjestaj</a>
+                                        </div>
+                                    </li>
+                                    <li class="main_nav_item"><a href="/odjava">Odjava</a></li>
                                 </th>
                             </ul>
                         </nav>

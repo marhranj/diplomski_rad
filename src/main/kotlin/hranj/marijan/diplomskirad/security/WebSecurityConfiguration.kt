@@ -1,7 +1,6 @@
 package hranj.marijan.diplomskirad.security
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -19,18 +18,30 @@ class WebSecurityConfiguration(private val userDetailsService: UserDetailsServic
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .anyRequest().permitAll()
+                .antMatchers("/admin/**")
+                    .hasAuthority("ADMIN")
+                .antMatchers("/prijava")
+                    .anonymous()
+                .antMatchers("/registracija")
+                    .anonymous()
+                .anyRequest()
+                    .permitAll()
                 .and()
-                .formLogin().loginPage("/prijava").defaultSuccessUrl("/")
-                .usernameParameter("korisnickoIme").passwordParameter("lozinka")
+                .formLogin()
+                    .loginPage("/prijava")
+                    .defaultSuccessUrl("/")
+                    .usernameParameter("korisnickoIme")
+                    .passwordParameter("lozinka")
                 .and()
-                .logout().logoutSuccessUrl("/login?logout")
+                .logout()
+                    .logoutUrl("/odjava")
+                    .logoutSuccessUrl("/")
                 .and()
-                .exceptionHandling().accessDeniedPage("/")
+                .exceptionHandling()
+                    .accessDeniedPage("/")
                 .and()
                 .csrf()
-                .disable()
+                    .disable()
     }
 
     @Autowired

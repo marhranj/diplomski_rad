@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: baseHead(~{::title})">
+    <title>Registracija</title>
+</head>
+<body>
+
+<div class="super_container">
+
+    <!-- Header -->
+
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_container d-flex flex-row align-items-center justify-content-start">
+
+                        <!-- Logo -->
+                        <div class="logo_container">
+                            <div class="logo">
+                                <div>destino</div>
+                                <div>travel agency</div>
+                                <div class="logo_image"><img src="images/logo.png" alt=""></div>
+                            </div>
+                        </div>
+
+                        <!-- Main Navigation -->
+                        <nav class="main_nav ml-auto">
+                            <ul class="main_nav_list">
+                                <li class="main_nav_item"><a href="/">Početna</a></li>
+                                <li class="main_nav_item"><a href="/prijava">Prijava</a></li>
+                                <li class="main_nav_item active"><a href="">Registracija</a></li>
+                            </ul>
+                        </nav>
+
+                        <!-- Hamburger -->
+                        <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home -->
+
+    <div class="home">
+        <div class="home_background" style="background-image:url(images/find.jpg)"></div>
+        <div class="home_content" style="left: 67%; top: 25%">
+            <div class="home_content_inner">
+                <div class="col-12">
+                    <div class="find_form_container">
+                        <form action="/registracija" th:object="${korisnikDto}" method="post" id="find_form"
+                              class="find_form d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-md-between justify-content-start flex-wrap">
+                            <div class="row" style="width:100%; padding-bottom: 30px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Ime:</div>
+                                    <input th:field="*{ime}" type="text" class="find_input"
+                                           placeholder="Ime">
+                                    <small th:if="${#fields.hasErrors('ime')}" th:errors="*{ime}" class="text-danger">ima</small>
+                                </div>
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Prezime:</div>
+                                    <input th:field="*{prezime}" type="text" class="find_input" required="required"
+                                           placeholder="Prezime">
+                                    <small th:if="${#fields.hasErrors('prezime')}" th:errors="*{prezime}" class="text-danger"></small>
+                                </div>
+                            </div>
+                            <div class="row" style="width:100%; padding-bottom: 30px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Email:</div>
+                                    <input th:field="*{email}" type="text" class="find_input" required="required"
+                                           placeholder="Email">
+                                    <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
+                                </div>
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Telefon:</div>
+                                    <input th:field="*{telefon}" type="text" class="find_input" required="required"
+                                           placeholder="Telefon">
+                                    <small th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}" class="text-danger"></small>
+                                </div>
+                            </div>
+                            <div class="row" style="width:100%; left: 15%; padding-bottom: 30px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Korisnicko ime:</div>
+                                    <input th:field="*{korisnickoIme}" type="text" class="find_input" required="required"
+                                           placeholder="korisnickoIme">
+                                    <small th:if="${#fields.hasErrors('korisnickoIme')}" th:errors="*{korisnickoIme}" class="text-danger"></small>
+                                </div>
+                            </div>
+                            <div class="row" style="width:100%; padding-bottom: 30px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Lozinka:</div>
+                                    <input th:field="*{lozinka}" type="password" class="find_input" required="required"
+                                           placeholder="Lozinka">
+                                    <small th:if="${#fields.hasErrors('lozinka')}" th:errors="*{lozinka}" class="text-danger"></small>
+                                </div>
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Ponovljena lozinka:</div>
+                                    <input th:field="*{ponovljenaLozinka}" type="password" class="find_input" required="required"
+                                           placeholder="Ponovljena lozinka">
+                                    <small th:if="${#fields.hasErrors('ponovljenaLozinka')}" th:errors="*{ponovljenaLozinka}" class="text-danger"></small>
+                                    <small th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" class="text-danger"></small>
+                                </div>
+                            </div>
+                            <div class="row" style="width:100%; left: 15%">
+                                <div class="find_item">
+                                    <button class="button find_button" style="padding-left: 30px">Registracija</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+
+</div>
+</body>
+</html>

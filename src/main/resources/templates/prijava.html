@@ -29,8 +29,7 @@
                             <ul class="main_nav_list">
                                 <li class="main_nav_item"><a href="/">Početna</a></li>
                                 <li class="main_nav_item active"><a href="#">Prijava</a></li>
-                                <li class="main_nav_item"><a href="registracija">Registracija</a></li>
-                                <li class="main_nav_item"><a href="mojeRezervacije">Moje rezervacije</a></li>
+                                <li class="main_nav_item"><a href="/registracija">Registracija</a></li>
                             </ul>
                         </nav>
 
@@ -70,6 +69,11 @@
                             <div class="row" style="width:100%">
                                 <div class="find_item">
                                     <button class="button find_button">Prijava</button>
+                                </div>
+                            </div>
+                            <div th:if="${param.error ne null}" class="row" style="width:100%; padding-top: 30px">
+                                <div class="find_item">
+                                    <span class="alert-danger">Netočno korisničko ime ili lozinka.</span>
                                 </div>
                             </div>
                         </form>

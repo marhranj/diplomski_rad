@@ -1,3 +1,7 @@
 .footer_logo_image {
     top: -85px;
 }
+
+.without-line-height a {
+    line-height: 2;
+}
