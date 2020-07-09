@@ -55,7 +55,7 @@
                             <div class="row" style="width:100%; padding-bottom: 30px">
                                 <div class="find_item" style="padding-right: 10px">
                                     <div>Ime:</div>
-                                    <input th:field="*{ime}" type="text" class="find_input"
+                                    <input th:field="*{ime}" type="text" class="find_input" required="required"
                                            placeholder="Ime">
                                     <small th:if="${#fields.hasErrors('ime')}" th:errors="*{ime}" class="text-danger">ima</small>
                                 </div>

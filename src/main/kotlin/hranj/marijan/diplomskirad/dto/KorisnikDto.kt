@@ -1,5 +1,6 @@
 package hranj.marijan.diplomskirad.dto
 
+import hranj.marijan.diplomskirad.validators.JakaLozinka
 import hranj.marijan.diplomskirad.validators.JednakeLozinke
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty
@@ -26,6 +27,7 @@ class KorisnikDto {
     var korisnickoIme: String? = null
 
     @NotEmpty(message = "Morate ispuniti ovo polje")
+    @JakaLozinka("Lozinka mora sadržavati barem 6 znakova, barem jedan poseban znak te barem jedan broj")
     var lozinka: String? = null
 
     @NotEmpty(message = "Morate ispuniti ovo polje")
