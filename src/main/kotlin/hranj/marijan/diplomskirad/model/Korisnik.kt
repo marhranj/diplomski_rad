@@ -1,10 +1,13 @@
 package hranj.marijan.diplomskirad.model
 
+import hranj.marijan.diplomskirad.dto.KorisnikDto
 import java.util.*
 import javax.persistence.*
 
 @Entity
 class Korisnik {
+
+
 
     @Column(name = "id", nullable = false)
     @Id
@@ -43,6 +46,16 @@ class Korisnik {
             inverseJoinColumns = [JoinColumn(name = "fk_uloga")]
     )
     var uloge: Set<Uloga>? = null
+
+    constructor(korisnikDto: KorisnikDto, uloge: Set<Uloga>, enkriptiranaLozinka: String) {
+        this.ime = korisnikDto.ime
+        this.prezime = korisnikDto.prezime
+        this.email = korisnikDto.email
+        this.telefon = korisnikDto.telefon
+        this.korisnickoIme = korisnikDto.korisnickoIme
+        this.lozinka = enkriptiranaLozinka
+        this.uloge = uloge
+    }
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true

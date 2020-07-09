@@ -18,6 +18,10 @@ class Uloga {
     @ManyToMany(mappedBy = "uloge")
     var korisnici: Set<Korisnik>? = null
 
+    constructor(naziv: NazivUloge?) {
+        this.naziv = naziv
+    }
+
     override fun equals(o: Any?): Boolean {
         if (this === o) return true
         if (o == null || javaClass != o.javaClass) return false

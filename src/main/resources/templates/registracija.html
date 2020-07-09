@@ -108,6 +108,16 @@
                                     <button class="button find_button" style="padding-left: 30px">Registracija</button>
                                 </div>
                             </div>
+                            <div th:if="${korisnikVecPostoji}" class="row" style="width:100%; padding-top: 30px">
+                                <div class="find_item">
+                                    <span class="alert-danger">Korisnik s navedenim korisničkim imenom ili emailom već postoji.</span>
+                                </div>
+                            </div>
+                            <div th:if="${problemSaBazom}" class="row" style="width:100%; padding-top: 30px">
+                                <div class="find_item">
+                                    <span class="alert-danger">Problem s bazom.</span>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
