@@ -18,6 +18,8 @@ class RegistracijaController(private val korisnikService: KorisnikService) {
     @GetMapping("/registracija")
     fun registracija(model: Model): String {
         model["korisnikDto"] = KorisnikDto()
+        model["korisnikVecPostoji"] = false
+        model["problemSaBazom"] = false
         return "registracija"
     }
 

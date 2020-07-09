@@ -8,6 +8,7 @@ class Znamenitost {
 
     @Column(name = "id", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id = 0
 
     @Column(name = "naziv", nullable = false, length = 45)

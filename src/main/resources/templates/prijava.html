@@ -62,7 +62,7 @@
                             <div class="row" style="width:100%; padding-bottom: 30px">
                                 <div class="find_item" style="padding-right: 10px">
                                     <div>Lozinka:</div>
-                                    <input type="text" name="lozinka" class="find_input" required="required"
+                                    <input type="password" name="lozinka" class="find_input" required="required"
                                            placeholder="Lozinka">
                                 </div>
                             </div>
@@ -71,9 +71,9 @@
                                     <button class="button find_button">Prijava</button>
                                 </div>
                             </div>
-                            <div th:if="${param.error ne null}" class="row" style="width:100%; padding-top: 30px">
+                            <div th:if="${param.error ne null}"class="row" style="width:100%; padding-top: 30px">
                                 <div class="find_item">
-                                    <span class="alert-danger">Netočno korisničko ime ili lozinka.</span>
+                                    <small class="text-danger">Netočno korisničko ime ili lozinka.</small>
                                 </div>
                             </div>
                         </form>

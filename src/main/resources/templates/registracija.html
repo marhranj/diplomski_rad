@@ -108,14 +108,10 @@
                                     <button class="button find_button" style="padding-left: 30px">Registracija</button>
                                 </div>
                             </div>
-                            <div th:if="${korisnikVecPostoji}" class="row" style="width:100%; padding-top: 30px">
+                            <div th:if="${korisnikVecPostoji || problemSaBazom}"class="row" style="width:100%; left: 15%; padding-top: 30px">
                                 <div class="find_item">
-                                    <span class="alert-danger">Korisnik s navedenim korisničkim imenom ili emailom već postoji.</span>
-                                </div>
-                            </div>
-                            <div th:if="${problemSaBazom}" class="row" style="width:100%; padding-top: 30px">
-                                <div class="find_item">
-                                    <span class="alert-danger">Problem s bazom.</span>
+                                    <small th:if="${korisnikVecPostoji}" class="text-danger">Korisnik s navedenim korisničkim imenom ili emailom već postoji</small>
+                                    <small th:if="${problemSaBazom}" class="text-danger">Problem s bazom</small>
                                 </div>
                             </div>
                         </form>
