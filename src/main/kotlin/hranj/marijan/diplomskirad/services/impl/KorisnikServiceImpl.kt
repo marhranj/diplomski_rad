@@ -6,13 +6,16 @@ import hranj.marijan.diplomskirad.exceptions.KorisnikVecPostojiException
 import hranj.marijan.diplomskirad.model.Korisnik
 import hranj.marijan.diplomskirad.model.Uloga
 import hranj.marijan.diplomskirad.repository.KorisnikRepository
+import hranj.marijan.diplomskirad.repository.UlogaRepository
 import hranj.marijan.diplomskirad.services.KorisnikService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.lang.Exception
 
 @Service
-class KorisnikServiceImpl(private val korisnikRepository: KorisnikRepository, private val passwordEncoder: PasswordEncoder) : KorisnikService {
+class KorisnikServiceImpl(private val korisnikRepository: KorisnikRepository,
+                          private val ulogaRepository: UlogaRepository,
+                          private val passwordEncoder: PasswordEncoder) : KorisnikService {
 
     override fun findAll(): List<Korisnik> {
         return korisnikRepository.findAll()
@@ -24,8 +27,8 @@ class KorisnikServiceImpl(private val korisnikRepository: KorisnikRepository, pr
             throw KorisnikVecPostojiException("Postoji već korisnik s korisničkim imenom: ${korisnikDto.korisnickoIme} " +
                     "ili emailom: ${korisnikDto.email}")
         }
-
-        val korisnik: Korisnik = Korisnik(korisnikDto, setOf(Uloga(NazivUloge.KORISNIK)), passwordEncoder.encode(korisnikDto.lozinka))
+        val uloga: Uloga = ulogaRepository.findByNaziv(NazivUloge.KORISNIK)
+        val korisnik = Korisnik(korisnikDto, setOf(uloga), passwordEncoder.encode(korisnikDto.lozinka))
         korisnikRepository.save(korisnik)
     }
 

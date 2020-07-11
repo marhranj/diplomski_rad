@@ -32,9 +32,6 @@ class Lokacija {
     @OneToMany(mappedBy = "lokacija")
     var smjestaji: List<Smjestaj>? = null
 
-    @OneToMany(mappedBy = "lokacija")
-    var znamenitosti: List<Znamenitost>? = null
-
     override fun equals(o: Any?): Boolean {
         if (this === o) return true
         if (o == null || javaClass != o.javaClass) return false

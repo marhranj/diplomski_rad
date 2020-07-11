@@ -1,7 +1,6 @@
 package hranj.marijan.diplomskirad.controller
 
 import hranj.marijan.diplomskirad.enums.NazivUloge
-import hranj.marijan.diplomskirad.services.KorisnikService
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -9,7 +8,7 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class PreusmjeravanjeController(private val korisnikService: KorisnikService) {
+class KorisnikController {
 
     @GetMapping("/")
     fun pocetna(model: Model, authentication: Authentication?): String {

@@ -5,3 +5,9 @@
 .without-line-height a {
     line-height: 2;
 }
+
+.kategorija-text-area {
+    height: 212px;
+    line-height: 20px;
+    padding-top: 10px;
+}
