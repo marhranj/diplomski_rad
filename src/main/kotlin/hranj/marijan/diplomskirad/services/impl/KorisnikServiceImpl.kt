@@ -29,6 +29,4 @@ class KorisnikServiceImpl(private val korisnikRepository: KorisnikRepository, pr
         korisnikRepository.save(korisnik)
     }
 
-
-
 }

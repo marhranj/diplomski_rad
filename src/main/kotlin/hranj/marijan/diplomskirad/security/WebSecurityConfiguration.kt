@@ -39,9 +39,6 @@ class WebSecurityConfiguration(private val userDetailsService: UserDetailsServic
                 .and()
                 .exceptionHandling()
                     .accessDeniedPage("/")
-                .and()
-                .csrf()
-                    .disable()
     }
 
     @Autowired

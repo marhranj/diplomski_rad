@@ -43,10 +43,15 @@
                                             <a class="dropdown-item" href="/admin/smjestaj">Dodaj smjestaj</a>
                                         </div>
                                     </li>
-                                    <li class="main_nav_item"><a href="/odjava">Odjava</a></li>
+                                    <li class="main_nav_item"><a href="#" onclick="document.getElementById('odjava_forma').submit()">Odjava</a></li>
                                 </th>
                             </ul>
                         </nav>
+
+                        <form id="odjava_forma" hidden="hidden" method="post" th:action="@{/odjava}">
+                            <input type="submit">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
 
                         <!-- Hamburger -->
                         <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>

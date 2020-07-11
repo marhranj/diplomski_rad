@@ -50,7 +50,7 @@
             <div class="home_content_inner">
                 <div class="col-12">
                     <div class="find_form_container">
-                        <form action="/registracija" th:object="${korisnikDto}" method="post" id="find_form"
+                        <form th:action="@{/registracija}" th:object="${korisnikDto}" method="post" id="find_form"
                               class="find_form d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-md-between justify-content-start flex-wrap">
                             <div class="row" style="width:100%; padding-bottom: 30px">
                                 <div class="find_item" style="padding-right: 10px">
@@ -114,6 +114,7 @@
                                     <small th:if="${problemSaBazom}" class="text-danger">Problem s bazom</small>
                                 </div>
                             </div>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
                     </div>
                 </div>
