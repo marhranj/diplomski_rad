@@ -19,6 +19,10 @@ class SlikaLokacije {
     @ManyToOne
     var lokacija: Lokacija? = null
 
+    constructor(putanjaSlike: String?) {
+        this.putanjaSlike = putanjaSlike
+    }
+
     override fun equals(o: Any?): Boolean {
         if (this === o) return true
         if (o == null || javaClass != o.javaClass) return false

@@ -6,4 +6,6 @@ interface KategorijaService {
 
     fun findAll(): List<Kategorija>
 
+    fun findAllByIdIn(id: List<Int>): Set<Kategorija>
+
 }

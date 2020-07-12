@@ -4,8 +4,8 @@ import org.springframework.web.multipart.MultipartFile
 
 interface UpravljanjeSlikomService {
 
-    fun spremiSliku(slika: MultipartFile?)
+    fun spremiSliku(slika: MultipartFile?): String
 
-    fun spremiSlike(slike: List<MultipartFile>?)
+    fun spremiSlike(slike: List<MultipartFile>?): List<String>
 
 }

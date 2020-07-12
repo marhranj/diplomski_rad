@@ -13,7 +13,7 @@ class LokacijaDto {
     var opis: String? = null
 
     @NotEmpty(message = "Morate ispuniti ovo polje")
-    var kategorije: List<String>? = null
+    var kategorije: List<Int>? = null
 
     @Size(min = 3, message = "Morate dodate najmanje 3 slike")
     var slike: List<MultipartFile>? = null

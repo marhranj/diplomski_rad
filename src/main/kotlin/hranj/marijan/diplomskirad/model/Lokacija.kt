@@ -1,5 +1,6 @@
 package hranj.marijan.diplomskirad.model
 
+import hranj.marijan.diplomskirad.dto.LokacijaDto
 import java.util.*
 import javax.persistence.*
 
@@ -31,6 +32,13 @@ class Lokacija {
 
     @OneToMany(mappedBy = "lokacija")
     var smjestaji: List<Smjestaj>? = null
+
+    constructor(lokacijaDto: LokacijaDto, kategorije: Set<Kategorija>, slikeLokacije: List<SlikaLokacije>?) {
+        this.naziv = lokacijaDto.naziv
+        this.opis = lokacijaDto.opis
+        this.kategorije = kategorije
+        this.slikeLokacije = slikeLokacije
+    }
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true

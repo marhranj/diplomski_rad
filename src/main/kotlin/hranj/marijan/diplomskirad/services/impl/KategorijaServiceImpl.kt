@@ -12,4 +12,8 @@ class KategorijaServiceImpl(private val kategorijaRepository: KategorijaReposito
         return kategorijaRepository.findAll()
     }
 
+    override fun findAllByIdIn(id: List<Int>): Set<Kategorija> {
+        return kategorijaRepository.findAllByIdIn(id)
+    }
+
 }
