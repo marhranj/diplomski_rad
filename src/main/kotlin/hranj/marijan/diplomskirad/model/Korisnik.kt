@@ -36,10 +36,10 @@ class Korisnik {
     @Basic
     var lozinka: String? = null
 
-    @OneToMany(mappedBy = "korisnik")
+    @OneToMany(mappedBy = "korisnik", cascade = [CascadeType.ALL])
     var rezervacije: List<Rezervacija>? = null
 
-    @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(name = "korisnik_uloga",
             joinColumns = [JoinColumn(name = "fk_korisnik")],
             inverseJoinColumns = [JoinColumn(name = "fk_uloga")]

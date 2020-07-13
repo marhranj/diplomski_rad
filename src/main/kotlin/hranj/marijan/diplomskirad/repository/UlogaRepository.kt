@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UlogaRepository : JpaRepository<Uloga, Long> {
+interface UlogaRepository : JpaRepository<Uloga, Int> {
 
     fun findByNaziv(naziv : NazivUloge): Uloga
 

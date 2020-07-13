@@ -20,24 +20,23 @@ class Lokacija {
     @Basic
     var opis: String? = null
 
-    @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(name = "lokacija_kategorija",
             joinColumns = [JoinColumn(name = "fk_lokacija")],
             inverseJoinColumns = [JoinColumn(name = "fk_kategorija")]
     )
     var kategorije: Set<Kategorija>? = null
 
-    @OneToMany(mappedBy = "lokacija")
+    @OneToMany(mappedBy = "lokacija", cascade = [CascadeType.ALL])
     var slikeLokacije: List<SlikaLokacije>? = null
 
-    @OneToMany(mappedBy = "lokacija")
+    @OneToMany(mappedBy = "lokacija", cascade = [CascadeType.ALL])
     var smjestaji: List<Smjestaj>? = null
 
-    constructor(lokacijaDto: LokacijaDto, kategorije: Set<Kategorija>, slikeLokacije: List<SlikaLokacije>?) {
+    constructor(lokacijaDto: LokacijaDto, kategorije: Set<Kategorija>) {
         this.naziv = lokacijaDto.naziv
         this.opis = lokacijaDto.opis
         this.kategorije = kategorije
-        this.slikeLokacije = slikeLokacije
     }
 
     override fun equals(o: Any?): Boolean {

@@ -26,7 +26,7 @@
 
                         <nav class="main_nav ml-auto">
                             <ul class="main_nav_list">
-                                <li class="main_nav_item"><a href="#">Početna</a></li>
+                                <li class="main_nav_item"><a href="/">Početna</a></li>
                                     <li class="main_nav_item"><a href="/mojeRezervacije">Moje rezervacije</a></li>
                                     <li class="main_nav_item dropdown">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADMIN</a>
@@ -34,7 +34,7 @@
                                         <a class="dropdown-item">Akcije admina</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item active" href="#">Dodaj lokaciju</a>
-                                        <a class="dropdown-item" href="/admin/dodaj-smjestaj">Dodaj smjestaj</a>
+                                        <a class="dropdown-item" href="/admin/dodaj-smjestaj">Dodaj smještaj</a>
                                     </div>
                                 </li>
                                 <li class="main_nav_item"><a href="#" onclick="document.getElementById('odjava_forma').submit()">Odjava</a></li>
@@ -106,9 +106,9 @@
                                     <button class="button find_button" style="width: 230px">Spremi lokaciju</button>
                                 </div>
                             </div>
-                            <div th:if="${problemSaBazom}"class="row" style="width:100%; left: 15%; padding-top: 30px">
+                            <div th:if="${greska}"class="row" style="width:100%; left: 15%; padding-top: 30px">
                                 <div class="find_item">
-                                    <small class="text-danger">Problem s bazom</small>
+                                    <small class="text-danger">Dogodila se greška prilikom dodavanja lokacije</small>
                                 </div>
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

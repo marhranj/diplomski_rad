@@ -1,5 +1,6 @@
 package hranj.marijan.diplomskirad.model
 
+import hranj.marijan.diplomskirad.dto.SmjestajDto
 import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
@@ -35,8 +36,16 @@ class Smjestaj {
     @ManyToOne
     var lokacija: Lokacija? = null
 
-    @OneToMany(mappedBy = "smjestaj")
+    @OneToMany(mappedBy = "smjestaj", cascade = [CascadeType.ALL])
     var slikeSmjestaja: List<SlikaSmjestaja>? = null
+
+    constructor(smjestajDto: SmjestajDto, lokacija: Lokacija?) {
+        this.naziv = smjestajDto.naziv
+        this.cijena = smjestajDto.cijena
+        this.email = smjestajDto.email
+        this.maxOsoba = smjestajDto.brojOsoba
+        this.lokacija = lokacija
+    }
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true

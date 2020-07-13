@@ -19,8 +19,9 @@ class SlikaLokacije {
     @ManyToOne
     var lokacija: Lokacija? = null
 
-    constructor(putanjaSlike: String?) {
+    constructor(putanjaSlike: String?, lokacija: Lokacija?) {
         this.putanjaSlike = putanjaSlike
+        this.lokacija = lokacija
     }
 
     override fun equals(o: Any?): Boolean {

@@ -5,4 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface LokacijaRepository : JpaRepository<Lokacija, Long>
+interface LokacijaRepository : JpaRepository<Lokacija, Int>
