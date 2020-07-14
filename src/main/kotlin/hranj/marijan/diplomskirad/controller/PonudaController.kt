@@ -36,31 +36,31 @@ class PonudaController(private val kategorijaService: KategorijaService,
     }
 
     private fun filtrirajLokacije(rezervacijaDto: RezervacijaDto) : List<Lokacija> {
-        val lokacije = mutableListOf<Lokacija>()
+        val slobodneLokacije = mutableListOf<Lokacija>()
         for (lokacija: Lokacija in dohvatiLokacijePremaKategoriji(rezervacijaDto)) {
-            var postojiSlobodanTermin = true
+            val slobodniSmjestaji = mutableListOf<Smjestaj>()
             if (!lokacija.smjestaji.isNullOrEmpty()) {
-                val rezervacije = dohvatiRezervacijeZaSmjestaje(lokacija.smjestaji!!, rezervacijaDto)
-                if (!rezervacije.isNullOrEmpty()) {
-                    postojiSlobodanTermin = rezervacije.stream()
-                            .anyMatch { !vremenaSePoklapaju(rezervacijaDto, it.pocetak, it.kraj) }
+                for (smjestaj: Smjestaj in lokacija.smjestaji!!) {
+                    if (smjestaj.maxOsoba >= rezervacijaDto.brojOsoba) {
+                        val rezervacije = smjestaj.rezervacije
+                        if (!rezervacije.isNullOrEmpty()) {
+                            val postojiSlobodanTermin = rezervacije.stream()
+                                    .anyMatch { !vremenaSePoklapaju(rezervacijaDto, it.pocetak, it.kraj) }
+                            if (postojiSlobodanTermin) {
+                                slobodniSmjestaji.add(smjestaj)
+                            }
+                        } else {
+                            slobodniSmjestaji.add(smjestaj)
+                        }
+                    }
                 }
-            } else {
-                postojiSlobodanTermin = false
             }
-            if (postojiSlobodanTermin) {
-                lokacije.add(lokacija)
+            if (slobodniSmjestaji.isNotEmpty()) {
+                lokacija.smjestaji = slobodniSmjestaji
+                slobodneLokacije.add(lokacija)
             }
         }
-        return lokacije
-    }
-
-    private fun dohvatiRezervacijeZaSmjestaje(smjestaji: List<Smjestaj>, rezervacijaDto: RezervacijaDto): List<Rezervacija>? {
-        return smjestaji.stream()
-                .filter { smjestaj -> smjestaj.maxOsoba >= rezervacijaDto.brojOsoba }
-                .map { it.rezervacije }
-                .flatMap { it?.stream() }
-                .collect(Collectors.toList())
+        return slobodneLokacije
     }
 
     private fun dohvatiLokacijePremaKategoriji(rezervacijaDto: RezervacijaDto): List<Lokacija> {
