@@ -8,10 +8,10 @@ import javax.validation.constraints.*
 @KrajPoslijePocetka(message = "Krajnji datum mora biti poslije početnog")
 class RezervacijaDto {
 
-    @PositiveOrZero(message = "Morate odabrati lokaciju")
+    @PositiveOrZero
     var lokacija: Int = 0
 
-    @PositiveOrZero(message = "Morate odabrati kategoriju")
+    @PositiveOrZero
     var kategorija: Int = 0
 
     @Max(value = 100, message = "Broj mora biti manji ili jednak 100")

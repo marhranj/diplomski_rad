@@ -21,7 +21,7 @@ class SmjestajDto {
     @Min(value = 1, message = "Broj mora biti veći ili jednak 1")
     var brojOsoba: Int = 0
 
-    @PositiveOrZero(message = "Morate odabrati lokaciju")
+    @Positive(message = "Morate odabrati lokaciju")
     var lokacija: Int = 0
 
     @Size(min = 3, message = "Morate dodate najmanje 3 slike")
