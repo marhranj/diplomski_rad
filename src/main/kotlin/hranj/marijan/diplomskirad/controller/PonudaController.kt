@@ -36,8 +36,8 @@ class PonudaController(private val kategorijaService: KategorijaService,
     }
 
     private fun filtrirajLokacije(rezervacijaDto: RezervacijaDto) : List<Lokacija> {
-        val lokacije = dohvatiLokacijePremaKategoriji(rezervacijaDto)
-        for (lokacija: Lokacija in lokacije) {
+        val lokacije = mutableListOf<Lokacija>()
+        for (lokacija: Lokacija in dohvatiLokacijePremaKategoriji(rezervacijaDto)) {
             var postojiSlobodanTermin = true
             if (!lokacija.smjestaji.isNullOrEmpty()) {
                 val rezervacije = dohvatiRezervacijeZaSmjestaje(lokacija.smjestaji!!, rezervacijaDto)
@@ -48,14 +48,14 @@ class PonudaController(private val kategorijaService: KategorijaService,
             } else {
                 postojiSlobodanTermin = false
             }
-            if (!postojiSlobodanTermin) {
-                lokacije.remove(lokacija)
+            if (postojiSlobodanTermin) {
+                lokacije.add(lokacija)
             }
         }
         return lokacije
     }
 
-    private fun dohvatiRezervacijeZaSmjestaje(smjestaji: List<Smjestaj>, rezervacijaDto: RezervacijaDto): MutableList<Rezervacija>? {
+    private fun dohvatiRezervacijeZaSmjestaje(smjestaji: List<Smjestaj>, rezervacijaDto: RezervacijaDto): List<Rezervacija>? {
         return smjestaji.stream()
                 .filter { smjestaj -> smjestaj.maxOsoba >= rezervacijaDto.brojOsoba }
                 .map { it.rezervacije }
@@ -63,7 +63,7 @@ class PonudaController(private val kategorijaService: KategorijaService,
                 .collect(Collectors.toList())
     }
 
-    private fun dohvatiLokacijePremaKategoriji(rezervacijaDto: RezervacijaDto): MutableList<Lokacija> {
+    private fun dohvatiLokacijePremaKategoriji(rezervacijaDto: RezervacijaDto): List<Lokacija> {
         var lokacije: MutableList<Lokacija> = mutableListOf()
         if (rezervacijaDto.lokacija > 0) {
             lokacijaService.findById(rezervacijaDto.lokacija)
