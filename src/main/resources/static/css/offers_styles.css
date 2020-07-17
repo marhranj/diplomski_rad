@@ -1184,7 +1184,7 @@ section
 }
 .item_image
 {
-	width: 25%;
+	width: 50%;
 	float: left;
 }
 .item.box .item_image
@@ -1197,7 +1197,7 @@ section
 }
 .item_content
 {
-	width: 75%;
+	width: 50%;
 	padding-left: 29px;
 	margin-top: -4px;
 	float: left;

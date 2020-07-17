@@ -11,6 +11,8 @@ class RezervacijaDto {
     @PositiveOrZero
     var lokacija: Int = 0
 
+    var odabranaLokacija: Int = 0
+
     @PositiveOrZero
     var kategorija: Int = 0
 

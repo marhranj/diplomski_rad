@@ -10,24 +10,24 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.GetMapping
 import javax.validation.Valid
 
 @Controller
-class PonudaController(private val kategorijaService: KategorijaService,
-                       private val lokacijaService: LokacijaService,
-                       private val pretrazivanjePonudeService: PretrazivanjePonudeService) {
+class PonudaLokacijaController(private val kategorijaService: KategorijaService,
+                               private val lokacijaService: LokacijaService,
+                               private val pretrazivanjePonudeService: PretrazivanjePonudeService) {
 
-    @PostMapping("/pretrazi-ponudu")
+    @GetMapping("/pretrazi-ponudu-lokacija")
     fun pretraziPonuduPost(@Valid rezervacijaDto: RezervacijaDto, bindingResult: BindingResult,
                            model: Model, authentication: Authentication?): String {
         try {
-            model["rezervacijaDto"] = rezervacijaDto
             if (!bindingResult.hasErrors()) {
-                model["lokacije"] = pretrazivanjePonudeService.pretraziLokacije(rezervacijaDto)
+                model["lokacije"] = pretrazivanjePonudeService.pretraziSlobodneLokacije(rezervacijaDto)
                 dodajAtributeModelu(authentication, model)
                 return "lokacije"
             }
+            model["rezervacijaDto"] = rezervacijaDto
             model["kategorije"] = kategorijaService.findAll()
             model["lokacije"] = lokacijaService.findAll()
         } catch (e: Exception) {

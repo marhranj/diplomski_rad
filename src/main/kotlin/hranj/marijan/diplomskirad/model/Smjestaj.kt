@@ -29,6 +29,14 @@ class Smjestaj {
     @Basic
     var maxOsoba = 0
 
+    @Column(name = "opis", nullable = false, length = 1000)
+    @Basic
+    var opis: String? = null
+
+    @Column(name = "broj_zvjezdica", nullable = false)
+    @Basic
+    var brojZvjezdica = 0
+
     @OneToMany(mappedBy = "smjestaj")
     var rezervacije: List<Rezervacija>? = null
 
@@ -41,9 +49,11 @@ class Smjestaj {
 
     constructor(smjestajDto: SmjestajDto, lokacija: Lokacija?) {
         this.naziv = smjestajDto.naziv
+        this.opis = smjestajDto.opis
         this.cijena = smjestajDto.cijena
         this.email = smjestajDto.email
         this.maxOsoba = smjestajDto.brojOsoba
+        this.brojZvjezdica = smjestajDto.brojZvjezdica
         this.lokacija = lokacija
     }
 

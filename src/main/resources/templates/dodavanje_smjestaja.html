@@ -33,8 +33,8 @@
                                     <div class="dropdown-menu without-line-height">
                                         <a class="dropdown-item">Akcije admina</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item active" href="/admin/dodaj-lokaciju">Dodaj lokaciju</a>
-                                        <a class="dropdown-item" href="#">Dodaj smještaj</a>
+                                        <a class="dropdown-item" href="/admin/dodaj-lokaciju">Dodaj lokaciju</a>
+                                        <a class="dropdown-item active" href="#">Dodaj smještaj</a>
                                     </div>
                                 </li>
                                 <li class="main_nav_item"><a href="#" onclick="document.getElementById('odjava_forma').submit()">Odjava</a></li>
@@ -59,13 +59,13 @@
 
     <div class="home">
         <div class="home_background" style="background-image:url(/images/find.jpg)"></div>
-        <div class="home_content" style="left: 67%; top: 20%">
+        <div class="home_content" style="left: 67%; top: 16%">
             <div class="home_content_inner">
                 <div class="col-12">
                     <div class="find_form_container">
                         <form th:action="@{/admin/dodaj-smjestaj}" enctype="multipart/form-data" th:object="${smjestajDto}" method="post" id="find_form"
                               class="find_form d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-md-between justify-content-start flex-wrap">
-                            <div class="row" style="width:100%; padding-bottom: 30px">
+                            <div class="row" style="width:100%; padding-bottom: 19px">
                                 <div class="find_item" style="padding-right: 10px">
                                     <div>Naziv:</div>
                                     <input th:field="*{naziv}" type="text" class="find_input" required="required"
@@ -73,13 +73,29 @@
                                     <small th:if="${#fields.hasErrors('naziv')}" th:errors="*{naziv}" class="text-danger"></small>
                                 </div>
                                 <div class="find_item" style="padding-right: 10px">
-                                    <div>Prezime:</div>
+                                    <div>Email:</div>
                                     <input th:field="*{email}" type="text" class="find_input" required="required"
                                            placeholder="Email">
                                     <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
                                 </div>
                             </div>
-                            <div class="row" style="width:100%; padding-bottom: 30px">
+                            <div class="row" style="width:100%; left: 16%; padding-bottom: 19px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Opis:</div>
+                                    <textarea th:field="*{opis}" required="required" class="find_input kategorija-text-area"
+                                              placeholder="Opis" rows="4" cols="50" maxlength="1000"></textarea>
+                                    <small th:if="${#fields.hasErrors('opis')}" th:errors="*{opis}" class="text-danger"></small>
+                                </div>
+                            </div>
+                            <div class="row" style="width:100%; left: 16%; padding-bottom: 19px">
+                                <div class="find_item" style="padding-right: 10px">
+                                    <div>Broj zvjezdica:</div>
+                                    <input th:field="*{brojZvjezdica}" type="number" class="find_input" required="required" min="1" max="5"
+                                           placeholder="Broj zvjezdica">
+                                    <small th:if="${#fields.hasErrors('brojZvjezdica')}" th:errors="*{brojZvjezdica}" class="text-danger"></small>
+                                </div>
+                            </div>
+                            <div class="row" style="width:100%; padding-bottom: 19px">
                                 <div class="find_item" style="padding-right: 10px">
                                     <div>Cijena:</div>
                                     <input th:field="*{cijena}" type="number" min="1" step="any" class="find_input" required="required"
@@ -93,7 +109,7 @@
                                     <small th:if="${#fields.hasErrors('brojOsoba')}" th:errors="*{brojOsoba}" class="text-danger"></small>
                                 </div>
                             </div>
-                            <div class="row" style="width:100%; padding-bottom: 30px">
+                            <div class="row" style="width:100%; padding-bottom: 19px">
                                 <div class="find_item" style="padding-right: 10px">
                                     <div>Lokacija:</div>
                                     <select th:field="*{lokacija}" class="dropdown_item_select find_input" required="required">

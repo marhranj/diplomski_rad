@@ -14,7 +14,7 @@ import java.sql.Timestamp
 class PretrazivanjePonudeServiceImpl(private val kategorijaService: KategorijaService,
                                      private val lokacijaService: LokacijaService) : PretrazivanjePonudeService {
 
-    override fun pretraziLokacije(rezervacijaDto: RezervacijaDto) : List<Lokacija> {
+    override fun pretraziSlobodneLokacije(rezervacijaDto: RezervacijaDto) : List<Lokacija> {
         val slobodneLokacije = mutableListOf<Lokacija>()
         for (lokacija: Lokacija in dohvatiOdabraneIliLokacijePremaKategoriji(rezervacijaDto)) {
             var postojiSlobodanTermin = false
@@ -24,7 +24,7 @@ class PretrazivanjePonudeServiceImpl(private val kategorijaService: KategorijaSe
                         val rezervacije = smjestaj.rezervacije
                         if (!rezervacije.isNullOrEmpty()) {
                             postojiSlobodanTermin = rezervacije.stream()
-                                    .anyMatch { !vremenaSePoklapaju(rezervacijaDto, it.pocetak, it.kraj) }
+                                    .allMatch { !vremenaSePoklapaju(rezervacijaDto, it.pocetak, it.kraj) }
                         } else {
                             postojiSlobodanTermin = true
                         }
@@ -36,6 +36,30 @@ class PretrazivanjePonudeServiceImpl(private val kategorijaService: KategorijaSe
             }
         }
         return slobodneLokacije
+    }
+
+    override fun pretraziSlobodneSmjestaje(rezervacijaDto: RezervacijaDto): List<Smjestaj> {
+        val slobodniSmjestaji = mutableListOf<Smjestaj>()
+        val odabranaLokacija = lokacijaService.findById(rezervacijaDto.odabranaLokacija)
+        odabranaLokacija.ifPresent { lokacija ->
+            if (!lokacija.smjestaji.isNullOrEmpty()) {
+                for (smjestaj: Smjestaj in lokacija.smjestaji!!) {
+                    if (smjestaj.maxOsoba >= rezervacijaDto.brojOsoba) {
+                        val rezervacije = smjestaj.rezervacije
+                        if (!rezervacije.isNullOrEmpty()) {
+                            val postojiSlobodanTermin = rezervacije.stream()
+                                    .allMatch { !vremenaSePoklapaju(rezervacijaDto, it.pocetak, it.kraj) }
+                            if (postojiSlobodanTermin) {
+                                slobodniSmjestaji.add(smjestaj)
+                            }
+                        } else {
+                            slobodniSmjestaji.add(smjestaj)
+                        }
+                    }
+                }
+            }
+        }
+        return slobodniSmjestaji
     }
 
     private fun dohvatiOdabraneIliLokacijePremaKategoriji(rezervacijaDto: RezervacijaDto): List<Lokacija> {

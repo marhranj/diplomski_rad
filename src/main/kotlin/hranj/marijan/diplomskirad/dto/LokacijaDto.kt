@@ -9,7 +9,7 @@ class LokacijaDto {
     @NotEmpty(message = "Morate ispuniti ovo polje")
     var naziv: String? = null
 
-    @Size(min = 20, message = "Morate imati barem 20 znakova")
+    @Size(min = 20, max = 1000, message = "Morate imati barem 20 znakova a najviše 1000")
     var opis: String? = null
 
     @NotEmpty(message = "Morate ispuniti ovo polje")

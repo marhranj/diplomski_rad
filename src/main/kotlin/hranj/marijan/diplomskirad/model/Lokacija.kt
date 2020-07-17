@@ -16,7 +16,7 @@ class Lokacija {
     @Basic
     var naziv: String? = null
 
-    @Column(name = "opis", nullable = true, length = 500)
+    @Column(name = "opis", nullable = false, length = 1000)
     @Basic
     var opis: String? = null
 

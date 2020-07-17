@@ -11,3 +11,10 @@
     line-height: 20px;
     padding-top: 10px;
 }
+
+.max-character {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}

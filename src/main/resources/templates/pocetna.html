@@ -87,7 +87,7 @@
                 </div>
                 <div class="col-12">
                     <div class="find_form_container">
-                        <form th:action="@{/pretrazi-ponudu}" th:object="${rezervacijaDto}" method="post" id="find_form"
+                        <form th:action="@{/pretrazi-ponudu-lokacija}" th:object="${rezervacijaDto}" id="find_form"
                               class="find_form d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-md-between justify-content-start flex-wrap">
                             <div class="row" style="width:100%; padding-bottom: 20px">
                                 <div class="find_item text-center" style="padding-right: 10px">
@@ -139,7 +139,6 @@
                                     <button class="button find_button">Pretraži</button>
                                 </div>
                             </div>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
                     </div>
                 </div>
