@@ -94,7 +94,7 @@
 
                             <!-- Item -->
                             <div th:each="smjestaj,it : ${smjestaji}" th:classappend="${'rating_' + smjestaj.brojZvjezdica}" class="item clearfix">
-                                <div th:with="carouselId=${'carouselId' + it.index}" th:attr="id=${carouselId}" class="carousel slide item_image" data-ride="carousel">
+                                <div th:with="carouselId=${'carouselId' + it.index}" th:attr="id=${carouselId}" class="carousel slide item_image" data-interval="4000" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         <li th:each="slika,it : ${smjestaj.slikeSmjestaja}"
                                             th:attr="data-target=${'#' + carouselId},data-slide-to=${it.index}"

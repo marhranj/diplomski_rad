@@ -88,7 +88,7 @@
                         <th:block th:if="${not #lists.isEmpty(lokacije)}">
                             <!-- News Post -->
                             <div th:each="lok,it : ${lokacije}" class="news_post">
-                                <div class="post_title"><a href="#" th:text="${lok.naziv}"></a></div>
+                                <div class="post_title"><a th:text="${lok.naziv}"></a></div>
                                 <div class="post_meta">
                                     <ul>
                                         <li th:each="kat,it : ${lok.kategorije}" th:unless="${it.index > 6}"
@@ -96,7 +96,7 @@
                                     </ul>
                                 </div>
                                 <div class="post_image" th:with="carouselId=${'carouselId' + it.index}">
-                                    <div th:attr="id=${carouselId}" class="carousel slide" data-ride="carousel">
+                                    <div th:attr="id=${carouselId}" class="carousel slide" data-interval="4000" data-ride="carousel">
                                         <ol class="carousel-indicators">
                                             <li th:each="slika,it : ${lok.slikeLokacije}"
                                                 th:attr="data-target=${'#' + carouselId},data-slide-to=${it.index}"
