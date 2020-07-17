@@ -79,64 +79,84 @@
 
     <div class="offers">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="section_title text-center">
-                        <h2>Predloženi smještaji</h2>
-                        <div>Bacite pogled na sljedeće ponude</div>
+            <th:block th:if="${not #lists.isEmpty(smjestaji)}">
+                <div class="row">
+                    <div class="col">
+                        <div class="section_title text-center">
+                            <h2>Predloženi smještaji</h2>
+                            <div>Bacite pogled na sljedeće ponude</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="items item_grid clearfix">
+                <div class="row">
+                    <div class="col">
+                        <div class="items item_grid clearfix">
 
-                        <!-- Item -->
-                        <div th:each="smjestaj,it : ${smjestaji}" th:classappend="${'rating_' + smjestaj.brojZvjezdica}" class="item clearfix">
-                            <div th:with="carouselId=${'carouselId' + it.index}" th:attr="id=${carouselId}" class="carousel slide item_image" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li th:each="slika,it : ${smjestaj.slikeSmjestaja}"
-                                        th:attr="data-target=${'#' + carouselId},data-slide-to=${it.index}"
-                                        th:classappend="${it.index == 0} ? 'active' : ''"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div th:each="slika,it : ${smjestaj.slikeSmjestaja}"
-                                         th:classappend="${it.index == 0} ? 'active' : ''" class="carousel-item">
-                                        <img class="d-block w-100" th:attr="src=${slika.putanjaSlike}">
+                            <!-- Item -->
+                            <div th:each="smjestaj,it : ${smjestaji}" th:classappend="${'rating_' + smjestaj.brojZvjezdica}" class="item clearfix">
+                                <div th:with="carouselId=${'carouselId' + it.index}" th:attr="id=${carouselId}" class="carousel slide item_image" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li th:each="slika,it : ${smjestaj.slikeSmjestaja}"
+                                            th:attr="data-target=${'#' + carouselId},data-slide-to=${it.index}"
+                                            th:classappend="${it.index == 0} ? 'active' : ''"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div th:each="slika,it : ${smjestaj.slikeSmjestaja}"
+                                             th:classappend="${it.index == 0} ? 'active' : ''" class="carousel-item">
+                                            <img class="d-block w-100" th:attr="src=${slika.putanjaSlike}">
+                                        </div>
                                     </div>
+                                    <a class="carousel-control-prev" th:attr="href=${'#' + carouselId}" role="button"
+                                       data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" th:attr="href=${'#' + carouselId}" role="button"
+                                       data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
-                                <a class="carousel-control-prev" th:attr="href=${'#' + carouselId}" role="button"
-                                   data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" th:attr="href=${'#' + carouselId}" role="button"
-                                   data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <div class="item_content">
-                                <div th:text="${'Cijena: ' + smjestaj.cijena * rezervacijaDto.brojOsoba + ' kn'}" class="item_price"></div>
-                                <div th:text="${smjestaj.naziv + ', ' + smjestaj.lokacija.naziv}" class="item_title"></div>
-                                <ul>
-                                    <li th:text="${'Prikazana cijena je za ' + rezervacijaDto.brojOsoba + ' osobu/e'}"></li>
-                                </ul>
-                                <div th:attr="data-rating=${smjestaj.brojZvjezdica}"
-                                     th:classappend="${'rating_' + smjestaj.brojZvjezdica}" class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                <div class="item_content">
+                                    <div th:text="${'Cijena: ' + smjestaj.cijena * rezervacijaDto.brojOsoba + ' kn'}" class="item_price"></div>
+                                    <div th:text="${smjestaj.naziv + ', ' + smjestaj.lokacija.naziv}" class="item_title"></div>
+                                    <ul>
+                                        <li th:text="${'Prikazana cijena je za ' + rezervacijaDto.brojOsoba + ' osobu/e'}"></li>
+                                    </ul>
+                                    <div th:attr="data-rating=${smjestaj.brojZvjezdica}"
+                                         th:classappend="${'rating_' + smjestaj.brojZvjezdica}" class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div th:text="${smjestaj.opis}" class="item_text max-character"></div>
+
+                                    <form th:if="${korisnickoIme != ''}" th:action="@{/rezerviraj-smjestaj}" method="post" th:object="${rezervacijaDto}" onSubmit="return confirm('Jeste li sigurni da želite rezervirati smještaj')">
+                                        <input type="hidden" th:field="*{brojOsoba}">
+                                        <input type="hidden" th:field="*{pocetak}">
+                                        <input type="hidden" th:field="*{kraj}">
+                                        <input type="hidden" th:name="odabraniSmjestaj" th:id="odabraniSmjestaj" th:value="${smjestaj.id}">
+                                        <button class="find_button rezerviraj-button">Rezerviraj</button>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    </form>
                                 </div>
-                                <div th:text="${smjestaj.opis}" class="item_text max-character"></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
+            </th:block>
+            <th:block th:unless="${not #lists.isEmpty(smjestaji)}">
+                <div class="row">
+                    <div class="col">
+                        <div class="section_title text-center">
+                            <h2>Nema rezultata</h2>
+                            <div>Nisu pronađeni smještaji za odabrani filter</div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
         </div>
     </div>
 </div>

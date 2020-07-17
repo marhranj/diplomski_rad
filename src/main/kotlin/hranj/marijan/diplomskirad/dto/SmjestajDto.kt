@@ -31,7 +31,7 @@ class SmjestajDto {
     @Positive(message = "Morate odabrati lokaciju")
     var lokacija: Int = 0
 
-    @Size(min = 3, message = "Morate dodate najmanje 3 slike")
+    @Size(min = 3, max = 6, message = "Možete dodate najmanje 3 slike a najviše 6")
     var slike: List<MultipartFile>? = null
 
 }

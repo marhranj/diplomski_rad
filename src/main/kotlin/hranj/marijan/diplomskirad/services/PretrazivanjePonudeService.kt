@@ -7,6 +7,7 @@ import hranj.marijan.diplomskirad.model.Smjestaj
 interface PretrazivanjePonudeService {
 
     fun pretraziSlobodneLokacije(rezervacijaDto: RezervacijaDto): List<Lokacija>
+
     fun pretraziSlobodneSmjestaje(rezervacijaDto: RezervacijaDto): List<Smjestaj>
 
 }

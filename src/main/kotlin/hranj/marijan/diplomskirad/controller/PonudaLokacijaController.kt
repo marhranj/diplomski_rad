@@ -19,8 +19,8 @@ class PonudaLokacijaController(private val kategorijaService: KategorijaService,
                                private val pretrazivanjePonudeService: PretrazivanjePonudeService) {
 
     @GetMapping("/pretrazi-ponudu-lokacija")
-    fun pretraziPonuduPost(@Valid rezervacijaDto: RezervacijaDto, bindingResult: BindingResult,
-                           model: Model, authentication: Authentication?): String {
+    fun pretraziPonuduLokacija(@Valid rezervacijaDto: RezervacijaDto, bindingResult: BindingResult,
+                               model: Model, authentication: Authentication?): String {
         try {
             if (!bindingResult.hasErrors()) {
                 model["lokacije"] = pretrazivanjePonudeService.pretraziSlobodneLokacije(rezervacijaDto)

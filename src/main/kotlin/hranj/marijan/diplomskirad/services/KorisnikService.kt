@@ -9,4 +9,6 @@ interface KorisnikService {
 
     fun spremiKorisnika(korisnikDto: KorisnikDto)
 
+    fun findByKorisnickoIme(korisnickoIme: String): Korisnik?
+
 }

@@ -9,6 +9,7 @@ import hranj.marijan.diplomskirad.services.LokacijaService
 import hranj.marijan.diplomskirad.services.SmjestajService
 import hranj.marijan.diplomskirad.services.UpravljanjeSlikomService
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.stream.Collectors
 
 @Service
@@ -18,6 +19,10 @@ class SmjestajServiceImpl(private val smjestajRepository: SmjestajRepository,
 
     override fun findAll(): List<Smjestaj> {
         return smjestajRepository.findAll()
+    }
+
+    override fun findById(id: Int): Optional<Smjestaj> {
+        return smjestajRepository.findById(id)
     }
 
     @Throws(Exception::class)

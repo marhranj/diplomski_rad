@@ -12,4 +12,8 @@ class RezervacijaServiceImpl(private val rezervacijaRepository: RezervacijaRepos
         return rezervacijaRepository.findAll()
     }
 
+    override fun spremiRezervaciju(rezervacija: Rezervacija) {
+        rezervacijaRepository.save(rezervacija)
+    }
+
 }

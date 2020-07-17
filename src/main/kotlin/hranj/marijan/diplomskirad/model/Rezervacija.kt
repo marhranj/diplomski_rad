@@ -1,5 +1,6 @@
 package hranj.marijan.diplomskirad.model
 
+import hranj.marijan.diplomskirad.dto.RezervacijaDto
 import java.math.BigDecimal
 import java.sql.Timestamp
 import java.util.*
@@ -36,6 +37,15 @@ class Rezervacija {
     @JoinColumn(name = "fk_smjestaj", referencedColumnName = "id", nullable = false)
     @ManyToOne
     var smjestaj: Smjestaj? = null
+
+    constructor(rezervacijaDto: RezervacijaDto, korisnik: Korisnik?, smjestaj: Smjestaj?) {
+        this.pocetak = Timestamp.valueOf(rezervacijaDto.pocetak.atStartOfDay())
+        this.kraj = Timestamp.valueOf(rezervacijaDto.kraj.atStartOfDay())
+        this.brojOsoba = rezervacijaDto.brojOsoba
+        this.ukupnaCijena = smjestaj?.cijena?.multiply(BigDecimal(brojOsoba))
+        this.korisnik = korisnik
+        this.smjestaj = smjestaj
+    }
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true

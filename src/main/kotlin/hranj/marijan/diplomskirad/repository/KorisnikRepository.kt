@@ -9,4 +9,6 @@ interface KorisnikRepository : JpaRepository<Korisnik, Int> {
 
     fun findByKorisnickoImeOrEmail(korisnickoIme: String?, email: String?): Korisnik?
 
+    fun findByKorisnickoIme(korisnickoIme: String?): Korisnik?
+
 }

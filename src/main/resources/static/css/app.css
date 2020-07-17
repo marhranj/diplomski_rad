@@ -18,3 +18,9 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
+
+.rezerviraj-button {
+    width: 120px !important;
+    font-size: 14px !important;
+    padding-left: 25px !important;
+}

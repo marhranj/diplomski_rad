@@ -11,8 +11,6 @@ class RezervacijaDto {
     @PositiveOrZero
     var lokacija: Int = 0
 
-    var odabranaLokacija: Int = 0
-
     @PositiveOrZero
     var kategorija: Int = 0
 
@@ -27,5 +25,9 @@ class RezervacijaDto {
     @FutureOrPresent(message = "Morate odabrati budući datum")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     var kraj: LocalDate = LocalDate.now().plusDays(1)
+
+    var odabranaLokacija: Int = 0
+
+    var odabraniSmjestaj: Int = 0
 
 }

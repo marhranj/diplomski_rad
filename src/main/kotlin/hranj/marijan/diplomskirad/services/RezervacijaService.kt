@@ -6,4 +6,6 @@ interface RezervacijaService {
 
     fun findAll(): List<Rezervacija>
 
+    fun spremiRezervaciju(rezervacija: Rezervacija)
+
 }

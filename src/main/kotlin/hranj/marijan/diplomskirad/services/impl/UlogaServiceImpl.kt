@@ -1,5 +1,6 @@
 package hranj.marijan.diplomskirad.services.impl
 
+import hranj.marijan.diplomskirad.enums.NazivUloge
 import hranj.marijan.diplomskirad.model.Uloga
 import hranj.marijan.diplomskirad.repository.UlogaRepository
 import hranj.marijan.diplomskirad.services.UlogaService
@@ -10,6 +11,10 @@ class UlogaServiceImpl(private val ulogaRepository: UlogaRepository) : UlogaServ
 
     override fun findAll(): List<Uloga> {
         return ulogaRepository.findAll()
+    }
+
+    override fun findByNaziv(naziv: NazivUloge): Uloga {
+        return ulogaRepository.findByNaziv(naziv)
     }
 
 }
