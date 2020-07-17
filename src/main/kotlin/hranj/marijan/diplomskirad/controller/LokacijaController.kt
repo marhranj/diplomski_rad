@@ -1,8 +1,10 @@
 package hranj.marijan.diplomskirad.controller
 
 import hranj.marijan.diplomskirad.dto.LokacijaDto
+import hranj.marijan.diplomskirad.enums.NazivUloge
 import hranj.marijan.diplomskirad.services.KategorijaService
 import hranj.marijan.diplomskirad.services.LokacijaService
+import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set

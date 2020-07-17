@@ -17,25 +17,21 @@ class PretrazivanjePonudeServiceImpl(private val kategorijaService: KategorijaSe
     override fun pretraziLokacije(rezervacijaDto: RezervacijaDto) : List<Lokacija> {
         val slobodneLokacije = mutableListOf<Lokacija>()
         for (lokacija: Lokacija in dohvatiOdabraneIliLokacijePremaKategoriji(rezervacijaDto)) {
-            val slobodniSmjestaji = mutableListOf<Smjestaj>()
+            var postojiSlobodanTermin = false
             if (!lokacija.smjestaji.isNullOrEmpty()) {
                 for (smjestaj: Smjestaj in lokacija.smjestaji!!) {
                     if (smjestaj.maxOsoba >= rezervacijaDto.brojOsoba) {
                         val rezervacije = smjestaj.rezervacije
                         if (!rezervacije.isNullOrEmpty()) {
-                            val postojiSlobodanTermin = rezervacije.stream()
+                            postojiSlobodanTermin = rezervacije.stream()
                                     .anyMatch { !vremenaSePoklapaju(rezervacijaDto, it.pocetak, it.kraj) }
-                            if (postojiSlobodanTermin) {
-                                slobodniSmjestaji.add(smjestaj)
-                            }
                         } else {
-                            slobodniSmjestaji.add(smjestaj)
+                            postojiSlobodanTermin = true
                         }
                     }
                 }
             }
-            if (slobodniSmjestaji.isNotEmpty()) {
-                lokacija.smjestaji = slobodniSmjestaji
+            if (postojiSlobodanTermin) {
                 slobodneLokacije.add(lokacija)
             }
         }
@@ -52,6 +48,8 @@ class PretrazivanjePonudeServiceImpl(private val kategorijaService: KategorijaSe
             if (kategorija.isPresent) {
                 lokacije = kategorija.get().lokacije?.toList()?.toMutableList() ?: lokacije
             }
+        } else if (rezervacijaDto.lokacija == 0) {
+            lokacije = lokacijaService.findAll().toMutableList()
         }
         return lokacije
     }

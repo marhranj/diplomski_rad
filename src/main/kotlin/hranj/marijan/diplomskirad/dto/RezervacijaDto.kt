@@ -16,7 +16,7 @@ class RezervacijaDto {
 
     @Max(value = 100, message = "Broj mora biti manji ili jednak 100")
     @Min(value = 1, message = "Broj mora biti veći ili jednak 1")
-    var brojOsoba: Int = 0
+    var brojOsoba: Int = 1
 
     @FutureOrPresent(message = "Morate odabrati budući datum")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

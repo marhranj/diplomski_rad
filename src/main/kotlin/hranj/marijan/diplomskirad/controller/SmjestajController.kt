@@ -26,11 +26,11 @@ class SmjestajController(private val smjestajService: SmjestajService,
     @PostMapping("/admin/dodaj-smjestaj")
     fun dodavanjeSmjestajaPost(@Valid smjestajDto: SmjestajDto, bindingResult: BindingResult, model: Model): String {
         try {
-            model["lokacije"] = lokacijaService.findAll()
             if (!bindingResult.hasErrors()) {
                 smjestajService.spremiSmjestaj(smjestajDto)
                 return "redirect:/"
             }
+            model["lokacije"] = lokacijaService.findAll()
         } catch (e: Exception) {
             model["greska"] = true
         }

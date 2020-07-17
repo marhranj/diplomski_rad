@@ -93,6 +93,7 @@
                                 <div class="find_item text-center" style="padding-right: 10px">
                                     <div>Lokacija:</div>
                                     <select th:field="*{lokacija}" class="dropdown_item_select find_input">
+                                        <option value="0">Sve lokacije</option>
                                         <option th:each="lok : ${lokacije}"
                                                 th:value="${lok.id}"
                                                 th:utext="${lok.naziv}"/>
@@ -102,6 +103,7 @@
                                 <div class="find_item text-center" style="padding-right: 10px">
                                     <div>Kategorija:</div>
                                     <select th:field="*{kategorija}" class="dropdown_item_select find_input">
+                                        <option value="0">Sve kategorije</option>
                                         <option th:each="kat : ${kategorije}"
                                                 th:value="${kat.id}"
                                                 th:utext="${kat.naziv}"/>
@@ -112,7 +114,7 @@
                             <div class="row" style="width:100%; padding-bottom: 20px">
                                 <div class="find_item text-center" style="left: 16%">
                                     <div>Broj osoba:</div>
-                                    <input th:field="*{brojOsoba}" type="number" class="find_input" required="required"
+                                    <input th:field="*{brojOsoba}" type="number" value="1" class="find_input" required="required"
                                            placeholder="Maksimalni broj osoba">
                                     <small th:if="${#fields.hasErrors('brojOsoba')}" th:errors="*{brojOsoba}" class="text-danger"></small>
                                 </div>
