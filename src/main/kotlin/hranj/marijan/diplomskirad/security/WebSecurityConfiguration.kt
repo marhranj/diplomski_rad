@@ -20,7 +20,7 @@ class WebSecurityConfiguration(private val userDetailsService: UserDetailsServic
         http.authorizeRequests()
                 .antMatchers("/admin/**")
                     .hasAuthority("ADMIN")
-                .antMatchers("/rezerviraj-smjestaj", "/moji-smjestaji")
+                .antMatchers("/rezerviraj-smjestaj", "/moje-rezervacije")
                     .authenticated()
                 .antMatchers("/prijava", "/registracija")
                     .anonymous()

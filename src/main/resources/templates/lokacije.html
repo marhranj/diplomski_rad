@@ -33,7 +33,7 @@
                                     <li class="main_nav_item"><a href="/registracija">Registracija</a></li>
                                 </th>
                                 <th th:unless="${korisnickoIme == ''}">
-                                    <li class="main_nav_item"><a href="/mojeRezervacije">Moje rezervacije</a></li>
+                                    <li class="main_nav_item"><a href="/moje-rezervacije">Moje rezervacije</a></li>
                                     <li th:classappend="${adminKorisnik} ? 'dropdown' : ''" class="main_nav_item">
                                         <a th:text="${korisnickoIme}"
                                            th:classappend="${adminKorisnik} ? 'dropdown-toggle' : ''" class="nav-link"

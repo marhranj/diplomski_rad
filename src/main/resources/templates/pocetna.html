@@ -8,11 +8,6 @@
 <div class="super_container">
 
     <!-- Header -->
-    <th:block th:if="${rezervirano && korisnickoIme != ''}">
-        <script type="text/javascript">
-            alert('Uspješno ste rezervirali smještaj')
-        </script>
-    </th:block>
 
     <header class="header">
         <div class="container">
@@ -38,7 +33,7 @@
                                     <li class="main_nav_item"><a href="/registracija">Registracija</a></li>
                                 </th>
                                 <th th:unless="${korisnickoIme == ''}">
-                                    <li class="main_nav_item"><a href="/mojeRezervacije">Moje rezervacije</a></li>
+                                    <li class="main_nav_item"><a href="/moje-rezervacije">Moje rezervacije</a></li>
                                     <li th:classappend="${adminKorisnik} ? 'dropdown' : ''" class="main_nav_item">
                                         <a th:text="${korisnickoIme}" th:classappend="${adminKorisnik} ? 'dropdown-toggle' : ''" class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
                                         <div th:if="${adminKorisnik}" class="dropdown-menu without-line-height">

@@ -41,15 +41,6 @@ class Rezervacija {
     @ManyToOne
     var smjestaj: Smjestaj? = null
 
-    @Transient
-    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-
-    @Transient
-    var pocetakFormatiran: String? = null
-
-    @Transient
-    var krajFormatiran: String? = null
-
     constructor(rezervacijaDto: RezervacijaDto, korisnik: Korisnik?, smjestaj: Smjestaj?) {
         this.pocetak = Timestamp.valueOf(rezervacijaDto.pocetak.atStartOfDay())
         this.kraj = Timestamp.valueOf(rezervacijaDto.kraj.atStartOfDay())
@@ -58,8 +49,6 @@ class Rezervacija {
         this.ukupnaCijena = smjestaj?.cijena?.multiply(BigDecimal(brojOsoba * brojDana))
         this.korisnik = korisnik
         this.smjestaj = smjestaj
-        this.pocetakFormatiran = rezervacijaDto.pocetak.format(formatter)
-        this.krajFormatiran = rezervacijaDto.kraj.format(formatter)
     }
 
     override fun equals(o: Any?): Boolean {

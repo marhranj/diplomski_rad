@@ -12,7 +12,6 @@ import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.validation.Valid
 
 @Controller
@@ -22,8 +21,7 @@ class RezervacijaController(private val rezervacijaService: RezervacijaService,
 
     @PostMapping("/rezerviraj-smjestaj")
     fun pretraziPonuduSmjestaja(@Valid rezervacijaDto: RezervacijaDto, model: Model,
-                                bindingResult: BindingResult, authentication: Authentication?,
-                                redirectAttributes: RedirectAttributes): String {
+                                bindingResult: BindingResult, authentication: Authentication?): String {
         try {
             if (!bindingResult.hasErrors()) {
                 val korisnickoIme = authentication?.name ?: ""
@@ -35,7 +33,6 @@ class RezervacijaController(private val rezervacijaService: RezervacijaService,
                 } else {
                     model["greska"] = true
                 }
-                redirectAttributes.addFlashAttribute("rezervirano", true)
                 return "redirect:/"
             }
         } catch (e: Exception) {

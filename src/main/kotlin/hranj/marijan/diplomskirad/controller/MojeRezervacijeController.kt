@@ -1,23 +1,25 @@
 package hranj.marijan.diplomskirad.controller
 
-import hranj.marijan.diplomskirad.dto.RezervacijaDto
 import hranj.marijan.diplomskirad.enums.NazivUloge
-import hranj.marijan.diplomskirad.services.KategorijaService
-import hranj.marijan.diplomskirad.services.LokacijaService
+import hranj.marijan.diplomskirad.model.Rezervacija
+import hranj.marijan.diplomskirad.services.KorisnikService
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
+import org.thymeleaf.expression.Calendars
 
 @Controller
-class PocetnaController(private val kategorijaService: KategorijaService,
-                        private val lokacijaService: LokacijaService) {
+class MojeRezervacijeController(private val korisnikService: KorisnikService) {
 
-    @GetMapping("/")
-    fun pocetna(model: Model, authentication: Authentication?): String {
+    @GetMapping("/moje-rezervacije")
+    fun mojeRezervacije(model: Model, authentication: Authentication?): String {
         dodajAtributeModelu(authentication, model)
-        return "pocetna"
+        val korisnickoIme = authentication?.name ?: ""
+        val korisnik = korisnikService.findByKorisnickoIme(korisnickoIme)
+        model["rezervacije"] = korisnik?.rezervacije as List<Rezervacija>
+        return "moje_rezervacije"
     }
 
     private fun dodajAtributeModelu(authentication: Authentication?, model: Model) {
@@ -26,9 +28,6 @@ class PocetnaController(private val kategorijaService: KategorijaService,
                 ?.anyMatch { authority -> authority.authority == NazivUloge.ADMIN.toString() } ?: false
         model["korisnickoIme"] = authentication?.name?.toUpperCase() ?: ""
         model["adminKorisnik"] = korisnikJeAdmin
-        model["kategorije"] = kategorijaService.findAll()
-        model["lokacije"] = lokacijaService.findAll()
-        model["rezervacijaDto"] = RezervacijaDto()
         model["greska"] = false
     }
 
