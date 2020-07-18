@@ -33,6 +33,7 @@ class PonudaSmjestajaController(private val pretrazivanjePonudeService: Pretrazi
                 ?.anyMatch { authority -> authority.authority == NazivUloge.ADMIN.toString() } ?: false
         model["korisnickoIme"] = authentication?.name?.toUpperCase() ?: ""
         model["adminKorisnik"] = korisnikJeAdmin
+        model["greska"] = false
     }
 
 }

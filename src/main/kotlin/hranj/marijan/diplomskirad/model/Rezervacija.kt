@@ -3,8 +3,11 @@ package hranj.marijan.diplomskirad.model
 import hranj.marijan.diplomskirad.dto.RezervacijaDto
 import java.math.BigDecimal
 import java.sql.Timestamp
+import java.time.Duration
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 @Entity
 class Rezervacija {
@@ -38,13 +41,25 @@ class Rezervacija {
     @ManyToOne
     var smjestaj: Smjestaj? = null
 
+    @Transient
+    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+
+    @Transient
+    var pocetakFormatiran: String? = null
+
+    @Transient
+    var krajFormatiran: String? = null
+
     constructor(rezervacijaDto: RezervacijaDto, korisnik: Korisnik?, smjestaj: Smjestaj?) {
         this.pocetak = Timestamp.valueOf(rezervacijaDto.pocetak.atStartOfDay())
         this.kraj = Timestamp.valueOf(rezervacijaDto.kraj.atStartOfDay())
         this.brojOsoba = rezervacijaDto.brojOsoba
-        this.ukupnaCijena = smjestaj?.cijena?.multiply(BigDecimal(brojOsoba))
+        val brojDana = Duration.between(rezervacijaDto.pocetak.atStartOfDay(), rezervacijaDto.kraj.atStartOfDay()).toDays()
+        this.ukupnaCijena = smjestaj?.cijena?.multiply(BigDecimal(brojOsoba * brojDana))
         this.korisnik = korisnik
         this.smjestaj = smjestaj
+        this.pocetakFormatiran = rezervacijaDto.pocetak.format(formatter)
+        this.krajFormatiran = rezervacijaDto.kraj.format(formatter)
     }
 
     override fun equals(o: Any?): Boolean {

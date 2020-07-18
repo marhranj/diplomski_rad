@@ -8,6 +8,11 @@
 <div class="super_container">
 
     <!-- Header -->
+    <th:block th:if="${rezervirano && korisnickoIme != ''}">
+        <script type="text/javascript">
+            alert('Uspješno ste rezervirali smještaj')
+        </script>
+    </th:block>
 
     <header class="header">
         <div class="container">

@@ -9,6 +9,12 @@
 
     <!-- Header -->
 
+    <th:block th:if="${greska && korisnickoIme != ''}">
+        <script type="text/javascript">
+            alert('Dogodila se greška prilikom rezerviranja')
+        </script>
+    </th:block>
+
     <header class="header">
         <div class="container">
             <div class="row">
@@ -118,10 +124,11 @@
                                     </a>
                                 </div>
                                 <div class="item_content">
-                                    <div th:text="${'Cijena: ' + smjestaj.cijena * rezervacijaDto.brojOsoba + ' kn'}" class="item_price"></div>
+                                    <div th:text="${'Cijena: ' + smjestaj.cijena * rezervacijaDto.brojOsoba * rezervacijaDto.brojDana + ' kn'}" class="item_price"></div>
                                     <div th:text="${smjestaj.naziv + ', ' + smjestaj.lokacija.naziv}" class="item_title"></div>
                                     <ul>
-                                        <li th:text="${'Prikazana cijena je za ' + rezervacijaDto.brojOsoba + ' osobu/e'}"></li>
+                                        <li th:text="${'Cijena za ' + rezervacijaDto.brojOsoba + ' osobu/e'}"></li>
+                                        <li th:text="${'Cijena za ' + rezervacijaDto.brojDana + ' dan/a'}"></li>
                                     </ul>
                                     <div th:attr="data-rating=${smjestaj.brojZvjezdica}"
                                          th:classappend="${'rating_' + smjestaj.brojZvjezdica}" class="rating">
@@ -133,7 +140,8 @@
                                     </div>
                                     <div th:text="${smjestaj.opis}" class="item_text max-character"></div>
 
-                                    <form th:if="${korisnickoIme != ''}" th:action="@{/rezerviraj-smjestaj}" method="post" th:object="${rezervacijaDto}" onSubmit="return confirm('Jeste li sigurni da želite rezervirati smještaj')">
+                                    <form th:if="${korisnickoIme != ''}" th:action="@{/rezerviraj-smjestaj}" method="post" th:object="${rezervacijaDto}"
+                                          onSubmit="return confirm('Jeste li sigurni da želite rezervirati smještaj')">
                                         <input type="hidden" th:field="*{brojOsoba}">
                                         <input type="hidden" th:field="*{pocetak}">
                                         <input type="hidden" th:field="*{kraj}">

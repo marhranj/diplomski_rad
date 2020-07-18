@@ -29,6 +29,9 @@ class PocetnaController(private val kategorijaService: KategorijaService,
         model["kategorije"] = kategorijaService.findAll()
         model["lokacije"] = lokacijaService.findAll()
         model["rezervacijaDto"] = RezervacijaDto()
+        if (model.getAttribute("rezervirano") == null) {
+            model["rezervirano"] = false
+        }
         model["greska"] = false
     }
 

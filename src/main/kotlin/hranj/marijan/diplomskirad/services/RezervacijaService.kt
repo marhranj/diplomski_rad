@@ -8,4 +8,6 @@ interface RezervacijaService {
 
     fun spremiRezervaciju(rezervacija: Rezervacija)
 
+    fun rezerviraj(rezervacija: Rezervacija)
+
 }

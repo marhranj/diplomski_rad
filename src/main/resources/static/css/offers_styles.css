@@ -1218,7 +1218,7 @@ section
 }
 .item_content ul li:not(:last-of-type)::after
 {
-	content:'/';
+	content:'|';
 	margin-left: 5px;
 }
 .item_price

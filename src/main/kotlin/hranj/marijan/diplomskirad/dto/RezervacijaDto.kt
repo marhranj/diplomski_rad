@@ -2,6 +2,7 @@ package hranj.marijan.diplomskirad.dto
 
 import hranj.marijan.diplomskirad.validators.KrajPoslijePocetka
 import org.springframework.format.annotation.DateTimeFormat
+import java.time.Duration
 import java.time.LocalDate
 import javax.validation.constraints.*
 
@@ -29,5 +30,8 @@ class RezervacijaDto {
     var odabranaLokacija: Int = 0
 
     var odabraniSmjestaj: Int = 0
+
+    val brojDana: Long
+        get() = Duration.between(pocetak.atStartOfDay(), kraj.atStartOfDay()).toDays()
 
 }
