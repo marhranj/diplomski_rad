@@ -27,6 +27,8 @@ class RegistracijaController(private val korisnikService: KorisnikService) {
     fun registracijaPost(@Valid korisnikDto: KorisnikDto, bindingResult: BindingResult, model: Model): String {
         if (bindingResult.hasErrors()) {
             model["korisnikDto"] = korisnikDto
+            model["korisnikVecPostoji"] = false
+            model["problemSaBazom"] = false
             return "registracija"
         }
         try {

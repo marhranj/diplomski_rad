@@ -10,4 +10,8 @@ interface RezervacijaService {
 
     fun rezerviraj(rezervacija: Rezervacija)
 
+    fun otkazi(idRezervacije: Int)
+
+    fun obrisiRezervaciju(rezervacija: Rezervacija)
+
 }

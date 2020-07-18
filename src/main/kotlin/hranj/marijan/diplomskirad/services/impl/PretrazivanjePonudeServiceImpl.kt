@@ -28,6 +28,7 @@ class PretrazivanjePonudeServiceImpl(private val kategorijaService: KategorijaSe
                         } else {
                             postojiSlobodanTermin = true
                         }
+                        if (postojiSlobodanTermin) break
                     }
                 }
             }

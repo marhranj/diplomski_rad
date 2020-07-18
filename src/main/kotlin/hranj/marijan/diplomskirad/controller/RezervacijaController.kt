@@ -12,6 +12,8 @@ import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.validation.Valid
 
 @Controller
@@ -33,13 +35,24 @@ class RezervacijaController(private val rezervacijaService: RezervacijaService,
                 } else {
                     model["greska"] = true
                 }
-                return "redirect:/"
+                return "redirect:/moje-rezervacije"
             }
         } catch (e: Exception) {
             model["greska"] = true
         }
         dodajAtributeModelu(authentication, model)
         return "smjestaji"
+    }
+
+    @PostMapping("/otkazi-smjestaj")
+    fun otkaziSmjestaj(@RequestParam odabranaRezervacija: Int, model: Model,
+                                authentication: Authentication?, redirectAttributes: RedirectAttributes): String {
+        try {
+            rezervacijaService.otkazi(odabranaRezervacija)
+        } catch (e: Exception) {
+            redirectAttributes.addFlashAttribute("greska", true)
+        }
+        return "redirect:/moje-rezervacije"
     }
 
     private fun dodajAtributeModelu(authentication: Authentication?, model: Model) {

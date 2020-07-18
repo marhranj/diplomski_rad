@@ -21,12 +21,24 @@ class RezervacijaServiceImpl(private val rezervacijaRepository: RezervacijaRepos
         rezervacijaRepository.save(rezervacija)
     }
 
-    override fun rezerviraj(rezervacija: Rezervacija) {
-        spremiRezervaciju(rezervacija)
-        posaljiEmailVlasnikuSmjestaja(rezervacija)
+    override fun obrisiRezervaciju(rezervacija: Rezervacija) {
+        rezervacijaRepository.delete(rezervacija)
     }
 
-    fun posaljiEmailVlasnikuSmjestaja(rezervacija: Rezervacija) {
+    override fun rezerviraj(rezervacija: Rezervacija) {
+        spremiRezervaciju(rezervacija)
+        posaljiEmailORezervaciji(rezervacija)
+    }
+
+    override fun otkazi(idRezervacije: Int) {
+        val rezervacija = rezervacijaRepository.findById(idRezervacije)
+        rezervacija.ifPresent{
+            posaljiEmailOOtkazivanju(it)
+            obrisiRezervaciju(it)
+        }
+    }
+
+    fun posaljiEmailORezervaciji(rezervacija: Rezervacija) {
         val primatelj = rezervacija.smjestaj?.email ?: ""
         val imePrezime = "${rezervacija.korisnik?.ime} ${rezervacija.korisnik?.prezime}"
         val subjekt = "Rezervacija smještaja ${imePrezime}"
@@ -35,6 +47,18 @@ class RezervacijaServiceImpl(private val rezervacijaRepository: RezervacijaRepos
         val sadrzaj = "${imePrezime} s email adresom: ${rezervacija.korisnik?.email} te brojem telefona: ${rezervacija.korisnik?.telefon} " +
                 "je rezervirao smještaj ${rezervacija.smjestaj?.naziv} u datumu " +
                 "od ${formatiraniPocetak} do ${formatiraniKraj} te po cijeni od ${rezervacija.ukupnaCijena} kn"
+        emailService.posaljiEmail(primatelj, subjekt, sadrzaj)
+    }
+
+    fun posaljiEmailOOtkazivanju(rezervacija: Rezervacija) {
+        val primatelj = rezervacija.smjestaj?.email ?: ""
+        val imePrezime = "${rezervacija.korisnik?.ime} ${rezervacija.korisnik?.prezime}"
+        val subjekt = "Otkazivanje smještaja ${imePrezime}"
+        val formatiraniPocetak = formatter.format(rezervacija.pocetak)
+        val formatiraniKraj = formatter.format(rezervacija.kraj)
+        val sadrzaj = "${imePrezime} s email adresom: ${rezervacija.korisnik?.email} te brojem telefona: ${rezervacija.korisnik?.telefon} " +
+                "je otkazao smještaj ${rezervacija.smjestaj?.naziv} u datumu " +
+                "od ${formatiraniPocetak} do ${formatiraniKraj}"
         emailService.posaljiEmail(primatelj, subjekt, sadrzaj)
     }
 
