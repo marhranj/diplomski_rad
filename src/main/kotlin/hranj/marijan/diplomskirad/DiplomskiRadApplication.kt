@@ -7,6 +7,11 @@ import org.springframework.boot.runApplication
 class DiplomskiRadApplication
 
 	fun main(args: Array<String>) {
-		runApplication<DiplomskiRadApplication>(*args)
+        val i = 1
+        if (i !in 2..i + 6) {
+            println("Varijabla nije u rasponu brojeva")
+        }
+
+        runApplication<DiplomskiRadApplication>(*args)
 	}
 
