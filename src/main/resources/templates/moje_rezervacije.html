@@ -39,7 +39,8 @@
                                     <li class="main_nav_item"><a href="/registracija">Registracija</a></li>
                                 </th>
                                 <th th:unless="${korisnickoIme == ''}">
-                                    <li class="main_nav_item active"><a href="/moje-rezervacije">Moje rezervacije</a></li>
+                                    <li class="main_nav_item active"><a href="/moje-rezervacije">Moje rezervacije</a>
+                                    </li>
                                     <li th:classappend="${adminKorisnik} ? 'dropdown' : ''" class="main_nav_item">
                                         <a th:text="${korisnickoIme}"
                                            th:classappend="${adminKorisnik} ? 'dropdown-toggle' : ''" class="nav-link"
@@ -99,8 +100,10 @@
                         <div class="items item_grid clearfix">
 
                             <!-- Item -->
-                            <div th:each="rez,it : ${rezervacije}" th:classappend="${'rating_' + rez.smjestaj.brojZvjezdica}" class="item clearfix">
-                                <div th:with="carouselId=${'carouselId' + it.index}" th:attr="id=${carouselId}" class="carousel slide item_image" data-interval="4000" data-ride="carousel">
+                            <div th:each="rez,it : ${rezervacije}"
+                                 th:classappend="${'rating_' + rez.smjestaj.brojZvjezdica}" class="item clearfix">
+                                <div th:with="carouselId=${'carouselId' + it.index}" th:attr="id=${carouselId}"
+                                     class="carousel slide item_image" data-interval="4000" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         <li th:each="slika,it : ${rez.smjestaj.slikeSmjestaja}"
                                             th:attr="data-target=${'#' + carouselId},data-slide-to=${it.index}"
@@ -125,7 +128,8 @@
                                 </div>
                                 <div class="item_content">
                                     <div th:text="${'Cijena: ' + rez.ukupnaCijena + ' kn'}" class="item_price"></div>
-                                    <div th:text="${rez.smjestaj.naziv + ', ' + rez.smjestaj.lokacija.naziv}" class="item_title"></div>
+                                    <div th:text="${rez.smjestaj.naziv + ', ' + rez.smjestaj.lokacija.naziv}"
+                                         class="item_title"></div>
                                     <ul>
                                         <li th:text="${'Rezervirali ste za ' + rez.brojOsoba + ' osobu/e'}"></li>
                                         <li th:text="${'Od ' + #calendars.format(rez.pocetak, 'dd.MM.yyyy') + ' do ' +
@@ -143,8 +147,11 @@
 
                                     <form th:if="${korisnickoIme != ''}" th:action="@{/otkazi-smjestaj}" method="post"
                                           onSubmit="return confirm('Jeste li sigurni da želite otkazati smještaj')">
-                                        <input type="hidden" th:name="odabranaRezervacija" th:id="odabranaRezervacija" th:value="${rez.id}">
-                                        <button class="find_button otkazi-button" style="background: #0080ff !important">Otkaži</button>
+                                        <input type="hidden" th:name="odabranaRezervacija" th:id="odabranaRezervacija"
+                                               th:value="${rez.id}">
+                                        <button class="find_button otkazi-button"
+                                                style="background: #0080ff !important">Otkaži
+                                        </button>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     </form>
                                 </div>
@@ -165,11 +172,10 @@
             </th:block>
         </div>
     </div>
-</div>
 
-<!-- Footer -->
+    <!-- Footer -->
 
-<th:block th:replace="fragments/footer :: footer"></th:block>
+    <th:block th:replace="fragments/footer :: footer"></th:block>
 </div>
 </body>
 </html>
