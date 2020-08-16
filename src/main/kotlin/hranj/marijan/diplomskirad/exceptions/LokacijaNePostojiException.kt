@@ -1,8 +1,6 @@
 package hranj.marijan.diplomskirad.exceptions
 
-import org.springframework.security.core.AuthenticationException
-
-class LokacijaNePostojiException : AuthenticationException {
+class LokacijaNePostojiException : Exception {
 
     constructor(msg: String, t: Throwable) : super(msg, t)
 
