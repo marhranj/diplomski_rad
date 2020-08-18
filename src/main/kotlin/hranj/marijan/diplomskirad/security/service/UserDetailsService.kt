@@ -18,7 +18,7 @@ class UserDetailsService(private val korisnikRepository: KorisnikRepository) : U
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
-        val korisnik: Korisnik = korisnikRepository.findByKorisnickoImeOrEmail(username, username)
+        val korisnik = korisnikRepository.findByKorisnickoImeOrEmail(username, username)
                 ?: throw UsernameNotFoundException("Nepostojeće korisničko ime pod nazivom $username")
         val grantedAuthorities: MutableSet<GrantedAuthority> = HashSet()
         korisnik.uloge?.stream()
