@@ -22,7 +22,7 @@ class RezervacijaController(private val rezervacijaService: RezervacijaService,
                             private val smjestajService: SmjestajService) {
 
     @PostMapping("/rezerviraj-smjestaj")
-    fun pretraziPonuduSmjestaja(@Valid rezervacijaDto: RezervacijaDto, model: Model,
+    fun rezervirajSmjestaj(@Valid rezervacijaDto: RezervacijaDto, model: Model,
                                 bindingResult: BindingResult, authentication: Authentication?): String {
         try {
             if (!bindingResult.hasErrors()) {
