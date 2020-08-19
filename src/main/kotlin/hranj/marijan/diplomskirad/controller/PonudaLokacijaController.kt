@@ -22,9 +22,9 @@ class PonudaLokacijaController(private val kategorijaService: KategorijaService,
     fun pretraziPonuduLokacija(@Valid rezervacijaDto: RezervacijaDto, bindingResult: BindingResult,
                                model: Model, authentication: Authentication?): String {
         try {
+            dodajAtributeModelu(authentication, model)
             if (!bindingResult.hasErrors()) {
                 model["lokacije"] = pretrazivanjePonudeService.pretraziSlobodneLokacije(rezervacijaDto)
-                dodajAtributeModelu(authentication, model)
                 return "lokacije"
             }
             model["rezervacijaDto"] = rezervacijaDto
